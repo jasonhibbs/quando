@@ -8,8 +8,8 @@
           label(for="input-label") Label
           input(
             id="input-label"
-            placeholder="I was born"
             required
+            :placeholder="item.label"
             v-model="modelLabel"
           )
 
@@ -19,28 +19,26 @@
             id="input-date"
             type="date"
             required
+            :placeholder="item.datetime"
             v-model="modelDate"
           )
 
         .form-block
-          p ID is {{modelId}}
+          p ID is {{itemId}}
           p Label is {{ modelLabel }}
           p Date is {{ modelDate }}
           button(
             type="submit"
             :disabled="!isModelValid"
-          ) Add Item
+          ) Update Item
 
 
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Hashids from 'hashids'
-import { v4 as uuidv4 } from 'uuid'
 
 @Component
 export default class ItemNew extends Vue {
-  modelId: string = uuidv4()
   modelLabel: string = ''
   modelDate: string = ''
 
@@ -48,18 +46,35 @@ export default class ItemNew extends Vue {
     return this.modelLabel && this.modelDate
   }
 
+  get itemId() {
+    return this.$route.params.id
+  }
+
   get item() {
+    return this.$store.getters.getItemById(this.itemId)
+  }
+
+  get updatedItem() {
     return {
-      id: this.modelId,
+      id: this.itemId,
       label: this.modelLabel,
       datetime: `${this.modelDate}T00:00:00Z`,
     }
   }
 
+  mounted() {
+    if (!this.item) {
+      this.$router.push({ name: 'Single', params: { id: this.itemId } })
+    }
+
+    this.modelLabel = this.item.label
+    this.modelDate = this.item.datetime.slice(0, 10)
+  }
+
   onSubmit() {
     if (this.isModelValid) {
-      this.$store.commit('addItem', this.item)
-      this.$router.push({ name: 'Single', params: { id: this.modelId } })
+      this.$store.commit('updateItem', this.updatedItem)
+      this.$router.push({ name: 'Single', params: { id: this.itemId } })
     }
   }
 }

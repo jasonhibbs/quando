@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import ItemNew from '../views/ItemNew.vue'
 import ItemSingle from '../views/ItemSingle.vue'
+import ItemEdit from '../views/ItemEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes: RouteConfig[] = [
     path: '/items/:id',
     name: 'Single',
     component: ItemSingle,
+  },
+  {
+    path: '/items/:id/edit',
+    name: 'Edit',
+    component: ItemEdit,
   },
 ]
 

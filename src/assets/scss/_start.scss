@@ -1,8 +1,12 @@
 main {
-  padding: rem(20) 0;
+  padding: rem(24) 0;
 }
 
 .times-item {
   display: block;
-  margin: 0 0 rem(20);
+  margin: 0 0 rem(36);
+}
+
+.times-item-time {
+  font-size: 1.5em;
 }
