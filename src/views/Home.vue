@@ -1,18 +1,44 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+
+  main
+    .layout
+      p
+        router-link(
+          :to="{ name: 'New' }"
+        ) + Add New
+
+      .times
+        router-link.times-item(
+          v-for="time in times"
+          :key="time.id"
+          :to="{ name: 'Single', params: { id: time.id }}"
+        )
+          .times-item-label {{ time.label }}
+          .times-item-time {{ time.datetime | fromNow }}
+
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { mapState } from 'vuex'
+import { formatDistanceStrict } from 'date-fns'
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+@Component({
+  filters: {
+    fromNow: (date: string) => {
+      return formatDistanceStrict(new Date(date), new Date(), {
+        addSuffix: true,
+      })
+    },
+  },
+  computed: mapState(['items']),
+})
+export default class Home extends Vue {
+  items!: any
+
+  get times() {
+    return this.items
   }
 }
 </script>
+

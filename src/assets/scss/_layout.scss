@@ -1,0 +1,12 @@
+// Layout ——————————————————————————————————————————————————————————————
+
+:root {
+  --layout-measure: #{em(640)};
+  --layout-percent: #{precentage(320/375)};
+}
+
+.layout {
+  width: var(--layout-percent);
+  max-width: var(--layout-measure);
+  margin: 0 auto;
+}
