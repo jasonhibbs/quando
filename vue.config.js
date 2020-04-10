@@ -28,11 +28,11 @@ module.exports = {
     },
   },
   pwa: {
+    name: 'Since Then',
+    appleMobileWebAppCapable: 'yes',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/serviceWorker.js',
     },
-    appleMobileWebAppCapable: 'yes',
-    appleTouchStartupImage: 'poo',
   },
 }

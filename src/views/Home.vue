@@ -10,13 +10,17 @@
       h1 Times
 
       .times
-        router-link.times-item(
-          v-for="time in times"
-          :key="time.id"
-          :to="{ name: 'Single', params: { id: time.id }}"
-        )
-          .times-item-label {{ time.label }}
-          .times-item-time {{ time.datetime | fromNow }}
+        template(v-if="times.length")
+          router-link.times-item(
+            v-for="time in times"
+            :key="time.id"
+            :to="{ name: 'Single', params: { id: time.id }}"
+          )
+            .times-item-label {{ time.label }}
+            .times-item-time {{ time.datetime | fromNow }}
+
+        template(v-else)
+          p No times found…
 
 </template>
 

@@ -40,7 +40,7 @@
             button(
               type="submit"
               :disabled="!isModelValid"
-            ) Update Item
+            ) ✔ Update Item
 
 
 </template>

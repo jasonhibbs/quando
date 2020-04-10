@@ -10,10 +10,10 @@ Vue.use(VueRouter)
 const routes: RouteConfig[] = [
   {
     path: '*',
-    redirect: '/times/',
+    redirect: '/',
   },
   {
-    path: '/times/',
+    path: '/',
     name: 'List',
     component: Home,
   },

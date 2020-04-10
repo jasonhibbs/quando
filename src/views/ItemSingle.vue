@@ -14,9 +14,9 @@
           time.times-item-time(:datetime="item.datetime") {{ item.datetime | fromNow }}
 
         p
-          router-link(:to="{ name: 'Edit', params: { id: item.id } }") Edit
+          router-link.button(:to="{ name: 'Edit', params: { id: item.id } }") ✎ Edit
         p
-          button(@click="onClickButtonDelete") Delete
+          button(@click="onClickButtonDelete") ✗ Delete
 
       template(v-else)
         p That doesn’t exist
