@@ -12,11 +12,11 @@ module.exports = {
   },
   devServer: {
     disableHostCheck: true,
-    public: 'https://localhost:8080/',
-    https: {
-      key: fs.readFileSync('./certs/local-key.pem'),
-      cert: fs.readFileSync('./certs/local-cert.pem'),
-    },
+    // public: 'https://localhost:8080/',
+    // https: {
+    //   key: fs.readFileSync('./certs/local-key.pem'),
+    //   cert: fs.readFileSync('./certs/local-cert.pem'),
+    // },
   },
   css: {
     loaderOptions: {
