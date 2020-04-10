@@ -92,3 +92,12 @@ input[type='time'] {
     padding: 0 2px;
   }
 }
+
+%placeholder {
+  color: inherit;
+  opacity: (2/5);
+}
+
+::placeholder {
+  @extend %placeholder;
+}
