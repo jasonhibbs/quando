@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports = {
   chainWebpack: config => {
     config.plugin('html').tap(args => {
@@ -10,6 +12,11 @@ module.exports = {
   },
   devServer: {
     disableHostCheck: true,
+    public: 'https://localhost:8080/',
+    https: {
+      key: fs.readFileSync('./certs/local-key.pem'),
+      cert: fs.readFileSync('./certs/local-cert.pem'),
+    },
   },
   css: {
     loaderOptions: {
@@ -25,5 +32,7 @@ module.exports = {
     workboxOptions: {
       swSrc: 'src/serviceWorker.js',
     },
+    appleMobileWebAppCapable: 'yes',
+    appleTouchStartupImage: 'poo',
   },
 }

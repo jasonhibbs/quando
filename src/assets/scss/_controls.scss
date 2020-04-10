@@ -1,0 +1,44 @@
+:root {
+  --input-padding-x: 8;
+  --input-padding-y: 5;
+}
+
+input {
+  appearance: none;
+  background-color: var(--contrast-lightest);
+  border: 1px solid var(--contrast-lighter);
+  border-radius: 1px;
+  line-height: (20/16);
+  padding: rem(var(--input-padding-y)) rem(var(--input-padding-x));
+  transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
+
+  &:focus,
+  &:hover {
+    border-color: var(--color-key);
+  }
+
+  @include focus-shadow();
+}
+
+input[type='date'],
+input[type='time'] {
+  --input-padding-x: 6;
+  min-height: calc((20em / 16) + (10rem / 16));
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    height: 0;
+    margin: 0;
+  }
+
+  &::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  &::-webkit-datetime-edit-minute-field,
+  &::-webkit-datetime-edit-hour-field,
+  &::-webkit-datetime-edit-day-field,
+  &::-webkit-datetime-edit-month-field,
+  &::-webkit-datetime-edit-year-field {
+    padding: 0 2px;
+  }
+}

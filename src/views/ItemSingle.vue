@@ -4,7 +4,9 @@
     .layout
 
       p
-        router-link(:to="{ name: 'List' }") ← The List
+        router-link(:to="{ name: 'List' }") ← Back
+
+      h1 Time
 
       template(v-if="item")
         .times-item

@@ -3,33 +3,44 @@
   main
     form(@submit.prevent='onSubmit')
       .layout
+        p
+          router-link(
+            :to="{ name: 'List' }"
+          ) ← Back
+
+        h1 New Time
+
+        form-block-input#input-label(
+          type="text"
+          placeholder="I was born"
+          required
+          v-model="modelLabel"
+        ) Label
+
+        form-block-input#input-date(
+          type="date"
+          placeholder="YYYY-MM-DD"
+          required
+          v-model="modelDate"
+        ) Date
+
+        form-block-input#input-time(
+          type="time"
+          placeholder="HH:MM"
+          required
+          v-model="modelTime"
+        ) Time
 
         .form-block
-          label(for="input-label") Label
-          input(
-            id="input-label"
-            placeholder="I was born"
-            required
-            v-model="modelLabel"
-          )
-
-        .form-block
-          label(for="input-date") Date
-          input(
-            id="input-date"
-            type="date"
-            required
-            v-model="modelDate"
-          )
-
-        .form-block
-          p ID is {{modelId}}
-          p Label is {{ modelLabel }}
-          p Date is {{ modelDate }}
-          button(
-            type="submit"
-            :disabled="!isModelValid"
-          ) Add Item
+          .form-block-hint
+            p ID is {{modelId}}
+            p Label is {{ modelLabel }}
+            p Date is {{ modelDatetime }}
+          .form-block-controls
+            button(
+              type="submit"
+              :disabled="!isModelValid"
+            ) Add Item
 
 
 </template>
@@ -37,22 +48,32 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Hashids from 'hashids'
 import { v4 as uuidv4 } from 'uuid'
+import FormBlockInput from '@/components/FormBlockInput.vue'
 
-@Component
+@Component({
+  components: { FormBlockInput },
+})
 export default class ItemNew extends Vue {
   modelId: string = uuidv4()
   modelLabel: string = ''
-  modelDate: string = ''
+  modelDate: string = new Date().toISOString().slice(0, 10)
+  modelTime: string = '00:00'
+
+  get modelDatetime() {
+    return this.modelDate
+      ? `${this.modelDate}T${this.modelTime || '00:00'}:00Z`
+      : ''
+  }
 
   get isModelValid() {
-    return this.modelLabel && this.modelDate
+    return this.modelLabel && this.modelDatetime
   }
 
   get item() {
     return {
       id: this.modelId,
       label: this.modelLabel,
-      datetime: `${this.modelDate}T00:00:00Z`,
+      datetime: this.modelDatetime,
     }
   }
 

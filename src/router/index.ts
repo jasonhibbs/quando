@@ -10,25 +10,25 @@ Vue.use(VueRouter)
 const routes: RouteConfig[] = [
   {
     path: '*',
-    redirect: '/items/',
+    redirect: '/times/',
   },
   {
-    path: '/items/',
+    path: '/times/',
     name: 'List',
     component: Home,
   },
   {
-    path: '/items/new',
+    path: '/times/new',
     name: 'New',
     component: ItemNew,
   },
   {
-    path: '/items/:id',
+    path: '/times/:id',
     name: 'Single',
     component: ItemSingle,
   },
   {
-    path: '/items/:id/edit',
+    path: '/times/:id/edit',
     name: 'Edit',
     component: ItemEdit,
   },

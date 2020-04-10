@@ -50,10 +50,14 @@ html {
   color: var(--color-text);
 }
 
+:focus {
+  outline: 2px solid var(--color-focus);
+}
+
 a {
   color: var(--color-key);
   text-decoration: none;
-  transition: color 0.1s, background-color 0.1s;
+  transition: color 0.1s, background-color 0.1s, outline-color 0.1s;
 
   &:focus,
   &:hover {

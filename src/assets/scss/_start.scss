@@ -1,12 +1,41 @@
 main {
-  padding: rem(24) 0;
+  padding: var(--space-bigger) 0;
+  padding-top: max(var(--space-bigger), env(safe-area-inset-top));
+  padding-bottom: max(var(--space-bigger), env(safe-area-inset-bottom));
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
 }
 
 .times-item {
   display: block;
-  margin: 0 0 rem(36);
+  margin: 0 0 var(--space-biggest);
 }
 
 .times-item-time {
   font-size: 1.5em;
+}
+
+.form-block {
+  margin-top: var(--space-bigger);
+}
+
+.form-block-label {
+  display: block;
+  margin-bottom: var(--space-big);
+}
+
+.form-block-hint {
+  color: var(--contrast-darker);
+}
+
+.form-block-controls {
+  display: flex;
+
+  input {
+    width: 100%;
+  }
+}
+
+.form-block-control {
+  flex: auto;
 }

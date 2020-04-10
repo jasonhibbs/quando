@@ -2,7 +2,15 @@
 
 :root {
   --layout-measure: #{em(640)};
-  --layout-percent: #{precentage(320/375)};
+  --layout-percent: #{percentage(320/375)};
+
+  --space-smallest: #{rem(1)};
+  --space-smaller: #{rem(2)};
+  --space-small: #{rem(4)};
+  --space-mid: #{rem(8)};
+  --space-big: #{rem(12)};
+  --space-bigger: #{rem(24)};
+  --space-biggest: #{rem(36)};
 }
 
 .layout {

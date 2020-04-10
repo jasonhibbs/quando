@@ -7,6 +7,8 @@
           :to="{ name: 'New' }"
         ) + Add New
 
+      h1 Times
+
       .times
         router-link.times-item(
           v-for="time in times"
