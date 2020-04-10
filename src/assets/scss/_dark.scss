@@ -1,0 +1,20 @@
+:root {
+  @media (prefers-color-scheme: dark) {
+    --color-black: #000;
+    --color-blue: #26f;
+
+    --color-root: var(--color-black);
+    --color-contrast: var(--color-white);
+
+    --contrast-darkest: #{fade-out($color-white, 0.4)};
+    --contrast-darker: #{fade-out($color-white, 0.5)};
+    --contrast-dark: #{fade-out($color-white, 0.6)};
+    --contrast-mid: #{fade-out($color-white, 0.7)};
+    --contrast-light: #{fade-out($color-white, 0.8)};
+    --contrast-lighter: #{fade-out($color-white, 0.85)};
+    --contrast-lightest: #{fade-out($color-white, 0.94)};
+
+    --color-text: var(--color-contrast);
+    --color-focus: #{fade-out($color-blue, 0.6)};
+  }
+}

@@ -1,8 +1,10 @@
 :root {
-  --input-padding-x: 8;
-  --input-padding-y: 5;
+  --input-padding-x: 16;
+  --input-padding-y: 10;
+  --input-color: var(--color-text);
+  --input-background-color: var(--contrast-lightest);
 
-  --button-color: var(--color-contrast);
+  --button-color: var(--color-text);
   --button-background-color: var(--contrast-lighter);
   --button-hover-background-color: var(--contrast-light);
 }
@@ -14,6 +16,7 @@
   border: 1px solid transparent;
   border-radius: 1px;
   cursor: pointer;
+  display: inline-block;
   line-height: (20/16);
   padding: rem(var(--input-padding-y)) rem(var(--input-padding-x));
   transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
@@ -26,6 +29,7 @@
 
   &[disabled] {
     pointer-events: none;
+    color: var(--contrast-light);
   }
 
   @include focus-shadow();
@@ -49,7 +53,8 @@ textarea {
 }
 
 input {
-  background-color: var(--contrast-lightest);
+  color: var(--input-color);
+  background-color: var(--input-background-color);
   border: 1px solid var(--contrast-lighter);
   border-radius: 1px;
   line-height: (20/16);
@@ -66,7 +71,7 @@ input {
 
 input[type='date'],
 input[type='time'] {
-  --input-padding-x: 6;
+  --input-padding-x: 12;
   appearance: none;
   min-height: calc((20em / 16) + (10rem / 16));
 

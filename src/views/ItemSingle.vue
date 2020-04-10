@@ -15,7 +15,7 @@
 
         p
           router-link.button(:to="{ name: 'Edit', params: { id: item.id } }") ✎ Edit
-        p
+          | &puncsp;
           button(@click="onClickButtonDelete") ✗ Delete
 
       template(v-else)
