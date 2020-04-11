@@ -1,27 +1,32 @@
 <template lang="pug">
 
-  main
-    .layout
+  .screen
 
-      p
-        router-link(:to="{ name: 'List' }") ← Back
+    .bar
+      .layout
+        router-link.bar-button._start(
+          :to="{ name: 'List' }"
+        ) ← Back
 
-      h1 Time
+    main
+      .layout
 
-      template(v-if="item")
-        .times-item
-          .times-item-label {{ item.label }}
-          time.times-item-time(:datetime="item.datetime") {{ item.datetime | fromNow }}
+        h1 Time
 
-        p
-          router-link.button(:to="{ name: 'Edit', params: { id: item.id } }") ✎ Edit
-          | &puncsp;
-          button(@click="onClickButtonDelete") ✗ Delete
+        template(v-if="item")
+          .times-item
+            .times-item-label {{ item.label }}
+            time.times-item-time(:datetime="item.datetime") {{ item.datetime | fromNow }}
 
-      template(v-else)
-        p That doesn’t exist
-        p
-          router-link(:to="{ name: 'List' }") Go to the list
+          p
+            router-link.button(:to="{ name: 'Edit', params: { id: item.id } }") ✎ Edit
+            | &puncsp;
+            button(@click="onClickButtonDelete") ✗ Delete
+
+        template(v-else)
+          p That doesn’t exist
+          p
+            router-link(:to="{ name: 'List' }") Go to the list
 
 
 </template>

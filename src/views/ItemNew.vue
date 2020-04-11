@@ -1,46 +1,51 @@
 <template lang="pug">
 
-  main
-    form(@submit.prevent='onSubmit')
+  .screen
+
+    .bar
       .layout
-        p
-          router-link(
-            :to="{ name: 'List' }"
-          ) ← Back
+        router-link.bar-button._start(
+          :to="{ name: 'List' }"
+        ) ← Back
 
-        h1 New Time
+    main
+      .layout
 
-        form-block-input#input-label(
-          type="text"
-          placeholder="I was born"
-          required
-          v-model="modelLabel"
-        ) Label
+        form(@submit.prevent='onSubmit')
 
-        form-block-input#input-date(
-          type="date"
-          placeholder="YYYY-MM-DD"
-          required
-          v-model="modelDate"
-        ) Date
+          h1 New Time
 
-        form-block-input#input-time(
-          type="time"
-          placeholder="HH:MM"
-          required
-          v-model="modelTime"
-        ) Time
+          form-block-input#input-label(
+            type="text"
+            placeholder="I was born"
+            required
+            v-model="modelLabel"
+          ) Label
 
-        .form-block
-          .form-block-hint
-            p ID is {{modelId}}
-            p Label is {{ modelLabel }}
-            p Date is {{ modelDatetime }}
-          .form-block-controls
-            button(
-              type="submit"
-              :disabled="!isModelValid"
-            ) Add Item
+          form-block-input#input-date(
+            type="date"
+            placeholder="YYYY-MM-DD"
+            required
+            v-model="modelDate"
+          ) Date
+
+          form-block-input#input-time(
+            type="time"
+            placeholder="HH:MM"
+            required
+            v-model="modelTime"
+          ) Time
+
+          .form-block
+            .form-block-hint
+              p ID is {{modelId}}
+              p Label is {{ modelLabel }}
+              p Date is {{ modelDatetime }}
+            .form-block-controls
+              button(
+                type="submit"
+                :disabled="!isModelValid"
+              ) Add Item
 
 
 </template>

@@ -2,7 +2,7 @@
 
 :root {
   --layout-measure: #{em(640)};
-  --layout-percent: #{percentage(320/375)};
+  --layout-base: calc(100vw - (56rem / 16));
 
   --space-smallest: #{rem(1)};
   --space-smaller: #{rem(2)};
@@ -14,7 +14,7 @@
 }
 
 .layout {
-  width: var(--layout-percent);
+  width: var(--layout-base);
   max-width: var(--layout-measure);
   margin: 0 auto;
 }

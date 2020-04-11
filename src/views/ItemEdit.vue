@@ -1,46 +1,49 @@
 <template lang="pug">
 
-  main(v-if="item")
-    form(@submit.prevent='onSubmit')
+  .screen(v-if="item")
+
+    .bar
       .layout
-        p
-          router-link(
-            :to="{ name: 'Single', params: { id: this.itemId } }"
-          ) ← Back
+        router-link.bar-button._start(
+          :to="{ name: 'Single', params: { id: this.itemId } }"
+        ) ← Back
 
-        h1 Edit Time
+    main
+      .layout
+        form(@submit.prevent='onSubmit')
+          h1 Edit Time
 
-        form-block-input#input-label(
-          type="text"
-          placeholder="I was born"
-          required
-          v-model="modelLabel"
-        ) Label
+          form-block-input#input-label(
+            type="text"
+            placeholder="I was born"
+            required
+            v-model="modelLabel"
+          ) Label
 
-        form-block-input#input-date(
-          type="date"
-          placeholder="YYYY-MM-DD"
-          required
-          v-model="modelDate"
-        ) Date
+          form-block-input#input-date(
+            type="date"
+            placeholder="YYYY-MM-DD"
+            required
+            v-model="modelDate"
+          ) Date
 
-        form-block-input#input-time(
-          type="time"
-          placeholder="HH:MM"
-          required
-          v-model="modelTime"
-        ) Time
+          form-block-input#input-time(
+            type="time"
+            placeholder="HH:MM"
+            required
+            v-model="modelTime"
+          ) Time
 
-        .form-block
-          .form-block-hint
-            p ID is {{itemId}}
-            p Label is {{ modelLabel }}
-            p Date is {{ modelDatetime }}
-          .form-block-controls
-            button(
-              type="submit"
-              :disabled="!isModelValid"
-            ) ✔ Update Item
+          .form-block
+            .form-block-hint
+              p ID is {{itemId}}
+              p Label is {{ modelLabel }}
+              p Date is {{ modelDatetime }}
+            .form-block-controls
+              button(
+                type="submit"
+                :disabled="!isModelValid"
+              ) ✔ Update Item
 
 
 </template>

@@ -9,7 +9,10 @@
 }
 
 @function rem($value: 1) {
-  @return #{'calc(1rem *'} $value #{'/ 16)'};
+  @return #{'calc(1rem / 16 *'} $value #{')'};
+}
+@function -rem($value: 1) {
+  @return #{'calc(-1rem / 16 *'} $value #{')'};
 }
 
 @function em($value: 1, $context: 16) {

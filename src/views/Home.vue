@@ -1,26 +1,30 @@
 <template lang="pug">
 
-  main
-    .layout
-      p
-        router-link(
+  .screen
+
+    .bar
+      .layout
+        router-link.bar-button._end(
           :to="{ name: 'New' }"
-        ) + Add New
+        ) Add
 
-      h1 Times
+    main
+      .layout
 
-      .times
-        template(v-if="times.length")
-          router-link.times-item(
-            v-for="time in times"
-            :key="time.id"
-            :to="{ name: 'Single', params: { id: time.id }}"
-          )
-            .times-item-label {{ time.label }}
-            .times-item-time {{ time.datetime | fromNow }}
+        h1 Times
 
-        template(v-else)
-          p No times found…
+        .times
+          template(v-if="times.length")
+            router-link.times-item(
+              v-for="time in times"
+              :key="time.id"
+              :to="{ name: 'Single', params: { id: time.id }}"
+            )
+              .times-item-label {{ time.label }}
+              .times-item-time {{ time.datetime | fromNow }}
+
+          template(v-else)
+            p No times found…
 
 </template>
 

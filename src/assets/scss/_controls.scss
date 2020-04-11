@@ -1,9 +1,11 @@
 :root {
-  --input-padding-x: 16;
+  --input-padding-x: 15;
   --input-padding-y: 10;
   --input-color: var(--color-text);
   --input-background-color: var(--contrast-lightest);
 
+  --button-padding-x: 18;
+  --button-padding-y: 10;
   --button-color: var(--color-text);
   --button-background-color: var(--contrast-lighter);
   --button-hover-background-color: var(--contrast-light);
@@ -18,7 +20,7 @@
   cursor: pointer;
   display: inline-block;
   line-height: (20/16);
-  padding: rem(var(--input-padding-y)) rem(var(--input-padding-x));
+  padding: rem(var(--button-padding-y)) rem(var(--button-padding-x));
   transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
 
   &:focus,
