@@ -11,12 +11,6 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
-)
-
-importScripts('/precache-manifest.f1483e499f7d62200ac3ef2a36f3b4e8.js')
-
 workbox.core.setCacheNameDetails({ prefix: 'code' })
 
 self.addEventListener('message', event => {
