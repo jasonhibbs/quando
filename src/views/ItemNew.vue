@@ -8,7 +8,7 @@
           :to="{ name: 'List' }"
         ) ← Back
       .bar-block
-        h1 New Title
+        h1 New Time
 
     main
       .layout
@@ -16,8 +16,8 @@
 
           form-block-input#input-label(
             type="text"
-            placeholder="I was born"
             required
+            :placeholder="placeholder"
             v-model="modelLabel"
           ) Label
 
@@ -63,14 +63,26 @@ export default class ItemNew extends Vue {
   modelDate: string = new Date().toISOString().slice(0, 10)
   modelTime: string = '00:00'
 
+  get placeholder() {
+    return 'It happened'
+  }
+
   get modelDatetime() {
     return this.modelDate
       ? `${this.modelDate}T${this.modelTime || '00:00'}:00Z`
       : ''
   }
 
+  get isDateValid() {
+    return !isNaN(Date.parse(this.modelDate))
+  }
+
+  get isDatetimeValid() {
+    return !isNaN(Date.parse(this.modelDatetime))
+  }
+
   get isModelValid() {
-    return this.modelLabel && this.modelDatetime
+    return this.modelLabel && this.modelDatetime && this.isDatetimeValid
   }
 
   get item() {

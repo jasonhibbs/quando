@@ -17,8 +17,8 @@
 
           form-block-input#input-label(
             type="text"
-            placeholder="I was born"
             required
+            :placeholder="placeholder"
             v-model="modelLabel"
           ) Label
 
@@ -75,6 +75,10 @@ export default class ItemNew extends Vue {
     this.setupModel()
   }
 
+  get placeholder() {
+    return 'It happened'
+  }
+
   setupModel() {
     this.modelLabel = this.item.label
     this.modelDate = this.item.datetime.slice(0, 10)
@@ -103,8 +107,16 @@ export default class ItemNew extends Vue {
       : ''
   }
 
+  get isDateValid() {
+    return !isNaN(Date.parse(this.modelDate))
+  }
+
+  get isDatetimeValid() {
+    return !isNaN(Date.parse(this.modelDatetime))
+  }
+
   get isModelValid() {
-    return this.modelLabel && this.modelDatetime
+    return this.modelLabel && this.modelDatetime && this.isDatetimeValid
   }
 
   onSubmit() {
