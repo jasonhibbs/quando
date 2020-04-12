@@ -7,7 +7,24 @@ main {
 
 .times-item {
   display: block;
-  margin: 0 0 var(--space-biggest);
+  box-shadow: 0 1px 0 var(--contrast-lightest);
+  color: var(--color-text);
+  // margin: 0 0 var(--space-biggest);
+
+  &:focus,
+  &:hover {
+    background-color: var(--contrast-lightest);
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline-offset: -2px;
+  }
+}
+
+.times-item-inner {
+  @extend .layout;
+  padding: rem(16) 0;
 }
 
 .times-item-time {
@@ -41,26 +58,40 @@ main {
 
 .bar {
   min-height: rem(44);
-  box-shadow: 0 1px 0 var(--contrast-lightest);
+  box-shadow: 0 1px 0 var(--contrast-lighter);
   position: sticky;
   top: 0;
   background-color: var(--color-root);
   z-index: 1;
   -webkit-overflow-scrolling: auto;
+}
 
-  .layout {
-    display: flex;
-    align-items: center;
+.bar-block {
+  @extend .layout;
+  display: flex;
+  align-items: center;
+
+  h1 {
+    line-height: (40/32);
+    margin: 0 0 rem(8);
   }
 }
 
 .bar-button {
-  --screen-padding-x: 24;
   flex: auto;
   line-height: (20/16);
   padding: rem(12) rem(var(--screen-padding-x));
   max-width: calc(50% + (24rem / 16));
   margin-left: -rem(var(--screen-padding-x));
+
+  // &:focus,
+  // &:hover {
+  //   text-decoration: none;
+  // }
+
+  &:focus {
+    outline-offset: -3px;
+  }
 
   &._end {
     text-align: right;

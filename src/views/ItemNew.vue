@@ -3,17 +3,17 @@
   .screen
 
     .bar
-      .layout
+      .bar-block
         router-link.bar-button._start(
           :to="{ name: 'List' }"
         ) ← Back
+      .bar-block
+        h1 New Title
 
     main
       .layout
 
         form(@submit.prevent='onSubmit')
-
-          h1 New Time
 
           form-block-input#input-label(
             type="text"

@@ -3,15 +3,17 @@
   .screen(v-if="item")
 
     .bar
-      .layout
+      .bar-block
         router-link.bar-button._start(
           :to="{ name: 'Single', params: { id: this.itemId } }"
         ) ← Back
 
+      .bar-block
+        h1 Edit Time
+
     main
       .layout
         form(@submit.prevent='onSubmit')
-          h1 Edit Time
 
           form-block-input#input-label(
             type="text"
@@ -35,7 +37,7 @@
           ) Time
 
           .form-block
-            .form-block-hint
+            //- .form-block-hint
               p ID is {{itemId}}
               p Label is {{ modelLabel }}
               p Date is {{ modelDatetime }}
@@ -45,8 +47,23 @@
                 :disabled="!isModelValid"
               ) ✔ Update Item
 
+        .zone-danger
+          h2 Danger Zone
+          button(
+            type="button"
+            @click="onClickButtonDelete"
+          ) ✗ Delete this time
 
 </template>
+
+<style lang="scss">
+@import '@/assets/scss/_util.scss';
+.zone-danger {
+  margin-top: rem(64);
+  margin-bottom: rem(120);
+}
+</style>
+
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import FormBlockInput from '@/components/FormBlockInput.vue'
@@ -103,6 +120,13 @@ export default class ItemNew extends Vue {
     if (this.isModelValid) {
       this.$store.commit('updateItem', this.updatedItem)
       this.$router.push({ name: 'Single', params: { id: this.itemId } })
+    }
+  }
+
+  onClickButtonDelete() {
+    if (confirm('You will never see this time again')) {
+      this.$store.commit('removeItemById', this.itemId)
+      this.$router.push({ name: 'List' })
     }
   }
 }

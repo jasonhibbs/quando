@@ -4,6 +4,8 @@
   --layout-measure: #{em(640)};
   --layout-base: calc(100vw - (56rem / 16));
 
+  --screen-padding-x: 24;
+
   --space-smallest: #{rem(1)};
   --space-smaller: #{rem(2)};
   --space-small: #{rem(4)};

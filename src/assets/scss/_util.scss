@@ -8,29 +8,29 @@
   @return m#{i}n(#{$numbers});
 }
 
-@function rem($value: 1) {
+@function rem($value: 16) {
   @return #{'calc(1rem / 16 *'} $value #{')'};
 }
-@function -rem($value: 1) {
+@function -rem($value: 16) {
   @return #{'calc(-1rem / 16 *'} $value #{')'};
 }
 
-@function em($value: 1, $context: 16) {
+@function em($value: 16, $context: 16) {
   @return #{'calc(1em *'} $value #{'/'} $context #{')'};
 }
 
-@mixin focus-outline($color: var(--color-focus), $offset: 2px) {
+@mixin focus-outline($color: var(--color-focus), $width: 3px, $offset: 2px) {
   outline: 0 solid transparent;
   outline-offset: $offset;
 
   &:focus {
-    outline-width: 2px;
+    outline-width: $width;
     outline-color: $color;
   }
 }
 
-@mixin focus-shadow($color: var(--color-focus)) {
-  box-shadow: 0 0 0 2px transparent;
+@mixin focus-shadow($color: var(--color-focus), $width: 3px) {
+  box-shadow: 0 0 0 $width transparent;
 
   &,
   &:focus {
@@ -38,12 +38,12 @@
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px $color;
+    box-shadow: 0 0 0 $width $color;
   }
 }
 
-@mixin focus-shadow-inset($color: var(--color-focus)) {
-  box-shadow: inset 0 0 0 2px transparent;
+@mixin focus-shadow-inset($color: var(--color-focus), $width: 3px) {
+  box-shadow: inset 0 0 0 $width transparent;
 
   &,
   &:focus {
@@ -52,6 +52,6 @@
 
   &:focus {
     outline: none;
-    box-shadow: inset 0 0 0 2px $color;
+    box-shadow: inset 0 0 0 $width $color;
   }
 }

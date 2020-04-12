@@ -3,28 +3,29 @@
   .screen
 
     .bar
-      .layout
+      .bar-block
         router-link.bar-button._end(
           :to="{ name: 'New' }"
         ) Add
 
+      .bar-block
+        h1 Times
+
     main
       .layout
 
-        h1 Times
 
-        .times
-          template(v-if="times.length")
-            router-link.times-item(
-              v-for="time in times"
-              :key="time.id"
-              :to="{ name: 'Single', params: { id: time.id }}"
-            )
-              .times-item-label {{ time.label }}
-              .times-item-time {{ time.datetime | fromNow }}
 
-          template(v-else)
-            p No times found…
+      .times
+        template(v-if="times.length")
+          list-item-time(
+            v-for="time in times"
+            :key="time.id"
+            :time="time"
+          )
+
+        template(v-else)
+          p No times found…
 
 </template>
 
@@ -32,8 +33,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { formatDistanceStrict } from 'date-fns'
+import ListItemTime from '@/components/ListItemTime.vue'
 
 @Component({
+  components: { ListItemTime },
   filters: {
     fromNow: (date: string) => {
       return formatDistanceStrict(new Date(date), new Date(), {

@@ -3,25 +3,25 @@
   .screen
 
     .bar
-      .layout
+      .bar-block
         router-link.bar-button._start(
           :to="{ name: 'List' }"
         ) ← Back
+        router-link.bar-button._end(
+          :to="{ name: 'Edit' }"
+        ) Edit
+      .bar-block
+        h1 {{ item.label }}
 
     main
       .layout
 
-        h1 Time
-
         template(v-if="item")
-          .times-item
-            .times-item-label {{ item.label }}
-            time.times-item-time(:datetime="item.datetime") {{ item.datetime | fromNow }}
 
           p
-            router-link.button(:to="{ name: 'Edit', params: { id: item.id } }") ✎ Edit
-            | &puncsp;
-            button(@click="onClickButtonDelete") ✗ Delete
+            time(:datetime="item.datetime") {{ new Date(item.datetime).toLocaleString() }}
+          p
+            time(:datetime="item.datetime") {{ item.datetime | fromNow }}
 
         template(v-else)
           p That doesn’t exist
@@ -50,11 +50,6 @@ export default class ItemSingle extends Vue {
 
   get item() {
     return this.$store.getters.getItemById(this.itemId)
-  }
-
-  onClickButtonDelete() {
-    this.$store.commit('removeItemById', this.itemId)
-    this.$router.push({ name: 'List' })
   }
 }
 </script>
