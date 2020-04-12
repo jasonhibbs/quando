@@ -9,14 +9,34 @@
 }
 
 @function rem($value: 16) {
-  @return #{'calc(1rem / 16 *'} $value #{')'};
+  @return #{'calc((1rem/16) * '} $value #{')'};
 }
 @function -rem($value: 16) {
-  @return #{'calc(-1rem / 16 *'} $value #{')'};
+  @return #{'calc((-1rem/16) * '} $value #{')'};
 }
 
 @function em($value: 16, $context: 16) {
-  @return #{'calc(1em *'} $value #{'/'} $context #{')'};
+  @return #{'calc((1em *'} $context #{') * '} $value #{')'};
+}
+
+@mixin padding-x($right: 0, $left: $right) {
+  padding-left: $left;
+  padding-right: $right;
+}
+
+@mixin padding-y($top: 0, $bottom: $top) {
+  padding-top: $top;
+  padding-bottom: $bottom;
+}
+
+@mixin margin-x($right: 0, $left: $right) {
+  margin-left: $left;
+  margin-right: $right;
+}
+
+@mixin margin-y($top: 0, $bottom: $top) {
+  margin-top: $top;
+  margin-bottom: $bottom;
 }
 
 @mixin focus-outline($color: var(--color-focus), $width: 3px, $offset: 2px) {

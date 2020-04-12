@@ -13,7 +13,7 @@
 
     main
       .layout
-        form(@submit.prevent='onSubmit')
+        form.form-blocks(@submit.prevent='onSubmit')
 
           form-block-input#input-label(
             type="text"
@@ -36,7 +36,7 @@
             v-model="modelTime"
           ) Time
 
-          .form-block
+          .form-block._submit
             //- .form-block-hint
               p ID is {{itemId}}
               p Label is {{ modelLabel }}
@@ -45,25 +45,16 @@
               button(
                 type="submit"
                 :disabled="!isModelValid"
-              ) ✔ Update Item
+              ) Save Changes
 
         .zone-danger
           h2 Danger Zone
           button(
             type="button"
             @click="onClickButtonDelete"
-          ) ✗ Delete this time
+          ) ✗ Delete Time
 
 </template>
-
-<style lang="scss">
-@import '@/assets/scss/_util.scss';
-.zone-danger {
-  margin-top: rem(64);
-  margin-bottom: rem(120);
-}
-</style>
-
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import FormBlockInput from '@/components/FormBlockInput.vue'

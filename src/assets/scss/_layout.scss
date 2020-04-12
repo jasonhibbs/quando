@@ -1,22 +1,32 @@
 // Layout ——————————————————————————————————————————————————————————————
 
 :root {
+  --screen-padding-x: 20;
+
   --layout-measure: #{em(640)};
-  --layout-base: calc(100vw - (56rem / 16));
+  --layout-base: calc(100vw - ((2rem / 16) * var(--screen-padding-x)));
 
-  --screen-padding-x: 24;
+  --space-smallest: 1;
+  --space-smaller: 2;
+  --space-small: 4;
+  --space-mid: 8;
+  --space-big: 12;
+  --space-bigger: 24;
+  --space-biggest: 36;
 
-  --space-smallest: #{rem(1)};
-  --space-smaller: #{rem(2)};
-  --space-small: #{rem(4)};
-  --space-mid: #{rem(8)};
-  --space-big: #{rem(12)};
-  --space-bigger: #{rem(24)};
-  --space-biggest: #{rem(36)};
+  --space-rem-smallest: #{rem(var(--space-smallest))};
+  --space-rem-smaller: #{rem(var(--space-smaller))};
+  --space-rem-small: #{rem(var(--space-small))};
+  --space-rem-mid: #{rem(var(--space-mid))};
+  --space-rem-big: #{rem(var(--space-big))};
+  --space-rem-bigger: #{rem(var(--space-bigger))};
+  --space-rem-biggest: #{rem(var(--space-biggest))};
 }
 
 .layout {
   width: var(--layout-base);
   max-width: var(--layout-measure);
   margin: 0 auto;
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
 }

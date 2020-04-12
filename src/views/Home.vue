@@ -14,8 +14,6 @@
     main
       .layout
 
-
-
       .times
         template(v-if="times.length")
           list-item-time(
@@ -25,7 +23,8 @@
           )
 
         template(v-else)
-          p No times found…
+          .list-copy
+            p No times found
 
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  .form-block
+  .form-block._input
     label.form-block-label(
       :for="id"
     )

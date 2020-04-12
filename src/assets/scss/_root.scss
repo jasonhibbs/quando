@@ -1,7 +1,7 @@
 // Root ————————————————————————————————————————————————————————————————
 
 $color-white: #fff;
-$color-black: #112;
+$color-black: #111223;
 $color-blue: #26f;
 
 :root {
@@ -51,7 +51,7 @@ html {
 }
 
 :focus {
-  outline: 2px solid var(--color-focus);
+  outline: 3px solid var(--color-focus);
 }
 
 a {

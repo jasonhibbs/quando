@@ -12,8 +12,7 @@
 
     main
       .layout
-
-        form(@submit.prevent='onSubmit')
+        form.form-blocks(@submit.prevent='onSubmit')
 
           form-block-input#input-label(
             type="text"
@@ -36,8 +35,8 @@
             v-model="modelTime"
           ) Time
 
-          .form-block
-            .form-block-hint
+          .form-block._submit
+            //- .form-block-hint
               p ID is {{modelId}}
               p Label is {{ modelLabel }}
               p Date is {{ modelDatetime }}
@@ -45,7 +44,7 @@
               button(
                 type="submit"
                 :disabled="!isModelValid"
-              ) Add Item
+              ) Add Time
 
 
 </template>
