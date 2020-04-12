@@ -18,10 +18,16 @@
 
         template(v-if="item")
 
-          p
+          p on&puncsp;
             time(:datetime="item.datetime") {{ new Date(item.datetime).toLocaleString() }}
-          p
-            time(:datetime="item.datetime") {{ item.datetime | fromNow }}
+
+          p {{ totalSeconds }} seconds ago
+          p {{ totalMinutes }} minutes ago
+          p {{ totalHours }} hours ago
+          p {{ totalDays }} days ago
+          p {{ totalWeeks }} weeks ago
+          p {{ totalMonths }} months ago
+          p {{ totalYears }} years ago
 
         template(v-else)
           p That doesn’t exist
@@ -44,12 +50,62 @@ import { formatDistanceStrict } from 'date-fns'
   },
 })
 export default class ItemSingle extends Vue {
+  tick: number = 0
+  tickInterval: any = null
+
   get itemId() {
     return this.$route.params.id
   }
 
   get item() {
     return this.$store.getters.getItemById(this.itemId)
+  }
+
+  mounted() {
+    this.tickInterval = setInterval(() => {
+      this.tick++
+    }, 1000)
+  }
+
+  beforeDestroy() {
+    clearInterval(this.tickInterval)
+  }
+
+  get now() {
+    const t = this.tick // force update
+    return new Date().getTime()
+  }
+
+  get then() {
+    return new Date(this.item.datetime).getTime()
+  }
+
+  get totalSeconds() {
+    return Math.floor(Math.abs(this.then - this.now) / 1000)
+  }
+
+  get totalMinutes() {
+    return Math.floor(this.totalSeconds / 60)
+  }
+
+  get totalHours() {
+    return Math.floor(this.totalSeconds / 3600)
+  }
+
+  get totalDays() {
+    return Math.floor(this.totalSeconds / 86400)
+  }
+
+  get totalWeeks() {
+    return Math.floor(this.totalSeconds / 604800)
+  }
+
+  get totalMonths() {
+    return Math.floor(this.totalSeconds / 2629800)
+  }
+
+  get totalYears() {
+    return Math.floor(this.totalSeconds / 31557600)
   }
 }
 </script>
