@@ -1,7 +1,10 @@
-:root {
-  @media (prefers-color-scheme: dark) {
-    --color-black: #000;
-    --color-blue: #26f;
+// Dark ————————————————————————————————————————————————————————————————
+
+@media (prefers-color-scheme: dark) {
+  $color-black: #000;
+
+  :root {
+    --color-black: #{$color-black};
 
     --color-root: var(--color-black);
     --color-contrast: var(--color-white);
@@ -15,6 +18,16 @@
     --contrast-lightest: #{fade-out($color-white, 0.94)};
 
     --color-text: var(--color-contrast);
-    --color-focus: #{fade-out($color-blue, 0.6)};
+    --color-focus: var(--color-key-50);
+    --color-text-error: #{lighten($color-error, 10)};
+
+    --button-bad-focus-color: var(--color-error-50);
+  }
+
+  a {
+    &:focus,
+    &:hover {
+      color: var(--color-key-lighter);
+    }
   }
 }

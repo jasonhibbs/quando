@@ -1,3 +1,5 @@
+// Controls ————————————————————————————————————————————————————————————
+
 :root {
   --controls-radius: 2px;
 
@@ -5,23 +7,46 @@
   --input-padding-y: 10;
   --input-color: var(--color-text);
   --input-background-color: var(--contrast-lighter);
+  --input-border-color: transparent;
+  --input-hover-border-color: var(--color-key);
+  --input-focus-color: var(--color-focus);
 
   --button-padding-x: 18;
   --button-padding-y: 10;
 
-  --button-color: var(--color-b600);
-  --button-background-color: var(--color-b200);
-  --button-hover-background-color: var(--color-b300);
+  --button-color: var(--color-key);
+  --button-background-color: var(--color-key-10);
+  --button-hover-background-color: var(--color-key-20);
   --button-focus-color: var(--color-focus);
 
-  --button-primary-color: var(--color-white);
-  --button-primary-background-color: var(--color-b500);
-  --button-primary-hover-background-color: var(--color-b600);
+  --button-key-color: var(--color-white);
+  --button-key-background-color: var(--color-key);
+  --button-key-hover-background-color: var(--color-key-darker);
+  --button-key-focus-color: var(--color-focus);
 
-  --button-bad-color: var(--color-r600);
-  --button-bad-background-color: var(--color-r200);
-  --button-bad-hover-background-color: var(--color-r300);
+  --button-good-color: var(--color-text-success);
+  --button-good-background-color: var(--color-success-20);
+  --button-good-hover-background-color: var(--color-success-30);
+  --button-good-focus-color: var(--color-success-10);
+
+  --button-bad-color: var(--color-text-error);
+  --button-bad-background-color: var(--color-error-20);
+  --button-bad-hover-background-color: var(--color-error-30);
+  --button-bad-focus-color: var(--color-error-10);
 }
+
+// Placeholders
+
+%placeholder {
+  color: inherit;
+  opacity: (2/5);
+}
+
+::placeholder {
+  @extend %placeholder;
+}
+
+// Buttons
 
 %button {
   --color: var(--button-color);
@@ -30,12 +55,13 @@
   --focus-color: var(--button-focus-color);
   --padding-x: var(--button-padding-x);
   --padding-y: var(--button-padding-y);
+  --radius: var(--controls-radius);
 
   appearance: none;
   color: var(--color);
   background-color: var(--background-color);
   border: 1px solid transparent;
-  border-radius: var(--controls-radius);
+  border-radius: var(--radius);
   cursor: pointer;
   display: inline-block;
   line-height: (20/16);
@@ -61,24 +87,34 @@
   @include focus-shadow(var(--focus-color));
 }
 
-%button._primary,
+%button._key,
 %button[type='submit'] {
-  --color: var(--button-primary-color);
-  --background-color: var(--button-primary-background-color);
-  --hover-background-color: var(--button-primary-hover-background-color);
+  --color: var(--button-key-color);
+  --background-color: var(--button-key-background-color);
+  --hover-background-color: var(--button-key-hover-background-color);
+  --focus-color: var(--button-key-focus-color);
+}
+
+%button._good {
+  --color: var(--button-bad-color);
+  --background-color: var(--button-bad-background-color);
+  --hover-background-color: var(--button-bad-hover-background-color);
+  --focus-color: var(--button-bad-focus-color);
 }
 
 %button._bad {
   --color: var(--button-bad-color);
   --background-color: var(--button-bad-background-color);
   --hover-background-color: var(--button-bad-hover-background-color);
-  --focus-color: #{fade-out($color-red, 0.8)};
+  --focus-color: var(--button-bad-focus-color);
 }
 
 button,
 .button {
   @extend %button;
 }
+
+// Inputs
 
 input[type='text'],
 input[type='email'],
@@ -92,27 +128,41 @@ textarea {
   }
 }
 
-input {
-  color: var(--input-color);
-  background-color: var(--input-background-color);
-  border: 1px solid transparent;
-  border-radius: var(--controls-radius);
+%input {
+  --color: var(--input-color);
+  --background-color: var(--input-background-color);
+  --border-color: var(--input-border-color);
+  --hover-border-color: var(--input-hover-border-color);
+  --focus-color: var(--input-focus-color);
+  --padding-x: var(--input-padding-x);
+  --padding-y: var(--input-padding-y);
+  --radius: var(--controls-radius);
+
+  color: var(--color);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
   line-height: (20/16);
-  padding: rem(var(--input-padding-y)) rem(var(--input-padding-x));
+  padding: rem(var(--padding-y)) rem(var(--padding-x));
   transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
 
   &:focus,
   &:hover {
     outline: none;
-    border-color: var(--color-key);
+    border-color: var(--hover-border-color);
   }
 
-  @include focus-shadow();
+  @include focus-shadow(var(--focus-color));
+}
+
+input,
+.input {
+  @extend %input;
 }
 
 input[type='date'],
 input[type='time'] {
-  --input-padding-x: 12;
+  --padding-x: 12;
   appearance: none;
   min-height: calc((20em / 16) + (10rem / 16));
 
@@ -132,13 +182,4 @@ input[type='time'] {
   &::-webkit-datetime-edit-year-field {
     padding: 0 2px;
   }
-}
-
-%placeholder {
-  color: inherit;
-  opacity: (2/5);
-}
-
-::placeholder {
-  @extend %placeholder;
 }
