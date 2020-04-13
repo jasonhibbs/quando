@@ -138,7 +138,7 @@ $slide-duration: 0.3s;
     transform: translateX(-100%);
     z-index: 98;
     opacity: 0;
-    background-color: var(--shade-mid);
+    background-color: var(--shade-light);
     will-change: opacity;
     backface-visibility: hidden;
   }
@@ -181,5 +181,5 @@ $slide-duration: 0.3s;
 
 .slide-left-leave-to,
 .slide-right-enter {
-  transform: scale(0.99);
+  transform: translateX(-30%);
 }

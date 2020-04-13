@@ -20,12 +20,6 @@ import HelloWorld from './components/HelloWorld.vue'
 export default class App extends Vue {
   transitionName: string = 'default'
 
-  mounted() {
-    window.onpopstate = (e: any) => {
-      console.log(e)
-    }
-  }
-
   @Watch('$route') onRouteChange(to: any, from: any) {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length

@@ -48,8 +48,16 @@ import ListItemTime from '@/components/ListItemTime.vue'
 export default class Home extends Vue {
   items!: any
 
+  sortByOldestLast: boolean = true
+
+  sortTimes(a: any, b: any) {
+    const aTime = new Date(a.datetime).getTime()
+    const bTime = new Date(b.datetime).getTime()
+    return this.sortByOldestLast ? bTime - aTime : aTime - bTime
+  }
+
   get times() {
-    return this.items
+    return this.items.sort(this.sortTimes)
   }
 }
 </script>
