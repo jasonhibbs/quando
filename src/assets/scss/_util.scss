@@ -16,7 +16,7 @@
 }
 
 @function em($value: 16, $context: 16) {
-  @return #{'calc((1em *'} $context #{') * '} $value #{')'};
+  @return #{'calc((1em /'} $context #{') * '} $value #{')'};
 }
 
 @mixin padding-x($right: 0, $left: $right) {

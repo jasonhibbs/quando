@@ -44,15 +44,17 @@
             .form-block-controls
               button(
                 type="submit"
-                :disabled="!isModelValid"
-              ) Save Changes
+                :disabled="!isModelValid || !isModelDifferent"
+              )
+                .button-label Save Changes
 
         .zone-danger
           h2 Danger Zone
-          button(
+          button._bad(
             type="button"
             @click="onClickButtonDelete"
-          ) ✗ Delete Time
+          )
+            .button-label ✗ Delete Time
 
 </template>
 <script lang="ts">
@@ -117,6 +119,12 @@ export default class ItemNew extends Vue {
 
   get isModelValid() {
     return this.modelLabel && this.modelDatetime && this.isDatetimeValid
+  }
+
+  get isModelDifferent() {
+    const labelChanged = this.item.label !== this.modelLabel
+    const datetimeChanged = this.item.datetime !== this.modelDatetime
+    return labelChanged || datetimeChanged
   }
 
   onSubmit() {

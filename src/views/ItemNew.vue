@@ -44,7 +44,8 @@
               button(
                 type="submit"
                 :disabled="!isModelValid"
-              ) Add Time
+              )
+                .button-label Add Time
 
 
 </template>

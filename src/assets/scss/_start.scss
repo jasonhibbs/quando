@@ -11,12 +11,13 @@ main {
 .times-item {
   display: block;
   box-shadow: 0 1px 0 var(--contrast-lightest);
-  color: var(--color-text);
+
   // margin: 0 0 var(--space-rem-biggest);
 
+  &,
   &:focus,
   &:hover {
-    text-decoration: none;
+    color: var(--color-text);
   }
 
   &:hover {

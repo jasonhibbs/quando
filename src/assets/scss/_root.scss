@@ -1,18 +1,43 @@
 // Root ————————————————————————————————————————————————————————————————
 
 $color-white: #fff;
-$color-black: #113;
-$color-blue: #26f;
+$color-black: hsl(220, 40%, 15%);
+$color-blue: hsl(220, 100%, 50%);
+$color-red: hsl(355, 85%, 50%);
+
+$color-b600: darken($color-blue, 8);
+$color-b500: $color-blue;
+$color-b400: lighten($color-blue, 14);
+$color-b300: lighten($color-blue, 28);
+$color-b200: lighten($color-blue, 33);
+
+$color-r600: darken($color-red, 10);
+$color-r500: $color-red;
+$color-r400: lighten($color-red, 20);
+$color-r300: lighten($color-red, 32);
+$color-r200: lighten($color-red, 38);
 
 :root {
   --color-white: #{$color-white};
   --color-black: #{$color-black};
   --color-blue: #{$color-blue};
-  --color-red: #e23;
+  --color-red: #{$color-red};
   --color-green: #3b3;
   --color-darkgreen: #2a2;
   --color-purple: #56e;
   --color-brown: #a86232;
+
+  --color-b600: #{$color-b600};
+  --color-b500: #{$color-b500};
+  --color-b400: #{$color-b400};
+  --color-b300: #{$color-b300};
+  --color-b200: #{$color-b200};
+
+  --color-r600: #{$color-r600};
+  --color-r500: #{$color-r500};
+  --color-r400: #{$color-r400};
+  --color-r300: #{$color-r300};
+  --color-r200: #{$color-r200};
 
   --color-root: var(--color-white);
   --color-contrast: var(--color-black);
@@ -61,7 +86,7 @@ a {
 
   &:focus,
   &:hover {
-    text-decoration: underline;
+    color: var(--color-b600);
   }
 
   @include focus-outline;
