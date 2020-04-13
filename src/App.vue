@@ -1,14 +1,15 @@
 <template lang="pug">
 
   #app
-    router-view
+    transition(:name="transitionName")
+      router-view
 
 </template>
 
 <style lang="scss" src="@/assets/scss/style.scss"></style>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 
 @Component({
@@ -16,5 +17,19 @@ import HelloWorld from './components/HelloWorld.vue'
     HelloWorld,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  transitionName: string = 'default'
+
+  mounted() {
+    window.onpopstate = (e: any) => {
+      console.log(e)
+    }
+  }
+
+  @Watch('$route') onRouteChange(to: any, from: any) {
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  }
+}
 </script>
