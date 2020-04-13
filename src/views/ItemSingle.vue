@@ -21,13 +21,13 @@
           p on&puncsp;
             time(:datetime="item.datetime") {{ new Date(item.datetime).toLocaleString() }}
 
-          p {{ totalSeconds }} seconds ago
-          p {{ totalMinutes }} minutes ago
-          p {{ totalHours }} hours ago
-          p {{ totalDays }} days ago
-          p {{ totalWeeks }} weeks ago
-          p {{ totalMonths }} months ago
-          p {{ totalYears }} years ago
+          p(v-if="totalSeconds") {{ totalSeconds | thousands }} seconds  {{ future ? '' : 'ago' }}
+          p(v-if="totalMinutes") {{ totalMinutes | thousands }} minutes  {{ future ? '' : 'ago' }}
+          p(v-if="totalHours") {{ totalHours | thousands }} hours  {{ future ? '' : 'ago' }}
+          p(v-if="totalDays") {{ totalDays | thousands }} days  {{ future ? '' : 'ago' }}
+          p(v-if="totalWeeks") {{ totalWeeks | thousands }} weeks  {{ future ? '' : 'ago' }}
+          p(v-if="totalMonths") {{ totalMonths | thousands }} months  {{ future ? '' : 'ago' }}
+          p(v-if="totalYears") {{ totalYears | thousands }} years  {{ future ? '' : 'ago' }}
 
         template(v-else)
           p That doesn’t exist
@@ -42,6 +42,9 @@ import { formatDistanceStrict } from 'date-fns'
 
 @Component({
   filters: {
+    thousands: (n: number) => {
+      return n.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    },
     fromNow: (date: string) => {
       return formatDistanceStrict(new Date(date), new Date(), {
         addSuffix: true,
@@ -52,6 +55,7 @@ import { formatDistanceStrict } from 'date-fns'
 export default class ItemSingle extends Vue {
   tick: number = 0
   tickInterval: any = null
+  future: boolean = false
 
   get itemId() {
     return this.$route.params.id
@@ -80,8 +84,16 @@ export default class ItemSingle extends Vue {
     return new Date(this.item.datetime).getTime()
   }
 
+  get delta() {
+    const d = this.then - this.now
+    if (d > 0) {
+      this.future = true
+    }
+    return d
+  }
+
   get totalSeconds() {
-    return Math.floor(Math.abs(this.then - this.now) / 1000)
+    return Math.floor(Math.abs(this.delta) / 1000)
   }
 
   get totalMinutes() {
