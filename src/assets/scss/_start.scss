@@ -93,7 +93,7 @@ main {
 .counter-count {
   font-size: min(12vw, em(72));
   line-height: 1;
-  padding-bottom: rem(var(--space-small));
+  padding-bottom: rem(var(--space-smaller));
   font-feature-settings: 'tnum' 1;
   font-variant-numeric: tabular-nums;
 }

@@ -3,7 +3,7 @@ const fs = require('fs')
 module.exports = {
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = 'Since Then'
+      args[0].title = 'Quando'
       return args
     })
   },
@@ -22,22 +22,22 @@ module.exports = {
     loaderOptions: {
       sass: {
         sassOptions: {
-          precision: 8
-        }
-      }
+          precision: 8,
+        },
+      },
     },
-    sourceMap: true
+    sourceMap: true,
   },
   pwa: {
     name: 'Quando',
     appleMobileWebAppCapable: 'yes',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      swSrc: 'src/serviceWorker.js'
+      swSrc: 'src/serviceWorker.js',
     },
     msTileColor: '#fff',
     manifestOptions: {
-      background_color: '#fff'
-    }
+      background_color: '#fff',
+    },
   },
 }

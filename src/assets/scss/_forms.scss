@@ -5,16 +5,29 @@
 }
 
 .form-block {
-  margin-top: var(--space-rem-bigger);
+  margin-top: var(--space-rem-big);
 
   &._submit {
-    margin-top: rem(#{'var(--space-bigger) * 2'});
+    margin-top: rem(var(--space-biggest));
+  }
+}
+
+.form-block._inline {
+  display: flex;
+
+  > .form-block {
+    flex: auto;
+    margin-top: 0;
+
+    & + .form-block {
+      margin-left: rem(var(--space-smaller));
+    }
   }
 }
 
 .form-block-label {
   display: block;
-  padding-bottom: var(--space-rem-big);
+  padding-bottom: var(--space-rem-small);
 }
 
 .form-block-hint {
@@ -23,12 +36,15 @@
 
 .form-block-controls {
   display: flex;
-
-  input {
-    width: 100%;
-  }
 }
 
 .form-block-control {
+  display: flex;
   flex: auto;
+  min-width: 0;
+
+  input {
+    flex: auto;
+    max-width: 100%;
+  }
 }

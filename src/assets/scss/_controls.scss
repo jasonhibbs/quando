@@ -165,13 +165,21 @@ input[type='time'] {
   --padding-x: 12;
   appearance: none;
   min-height: calc((20em / 16) + (10rem / 16));
+  min-width: 0;
+
+  &[required]::-webkit-clear-button {
+    appearance: none;
+    display: none;
+  }
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     height: 0;
     margin: 0;
   }
-
+  &::-webkit-datetime-edit {
+    min-width: 3em;
+  }
   &::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
   }

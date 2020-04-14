@@ -6,13 +6,14 @@
   --layout-measure: #{em(640)};
   --layout-base: calc(100vw - ((2rem / 16) * var(--screen-padding-x)));
 
-  --space-smallest: 1;
-  --space-smaller: 2;
-  --space-small: 4;
-  --space-mid: 8;
-  --space-big: 12;
-  --space-bigger: 24;
-  --space-biggest: 36;
+  --space-hairline: 1;
+  --space-smallest: 2;
+  --space-smaller: 4;
+  --space-small: 8;
+  --space-mid: 16;
+  --space-big: 24;
+  --space-bigger: 32;
+  --space-biggest: 48;
 
   --space-rem-smallest: #{rem(var(--space-smallest))};
   --space-rem-smaller: #{rem(var(--space-smaller))};

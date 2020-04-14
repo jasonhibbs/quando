@@ -6,7 +6,7 @@
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'List' }"
-        ) ← Back
+        ) Cancel
       .bar-block
         h1 New Time
 
@@ -21,6 +21,7 @@
             v-model="modelLabel"
           ) Label
 
+
           form-block-input#input-date(
             type="date"
             placeholder="YYYY-MM-DD"
@@ -28,12 +29,14 @@
             v-model="modelDate"
           ) Date
 
-          form-block-input#input-time(
-            type="time"
-            placeholder="HH:MM"
-            required
-            v-model="modelTime"
-          ) Time
+          .form-block._inline
+
+            form-block-input#input-time(
+              type="time"
+              placeholder="HH:MM"
+              required
+              v-model="modelTime"
+            ) Time
 
           .form-block._submit
             //- .form-block-hint
