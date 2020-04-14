@@ -1,0 +1,66 @@
+// Screens —————————————————————————————————————————————————————————————
+
+$slide-duration: 0.3s;
+
+.screen {
+  background-color: var(--color-root);
+  transform-origin: 0 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+
+  &:after {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 98;
+    opacity: 0;
+    background-color: var(--shade-light);
+    will-change: opacity;
+    backface-visibility: hidden;
+  }
+}
+
+// Foreground
+.slide-left-enter-active,
+.slide-right-leave-active {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: transform $slide-duration ease-out;
+
+  &:after {
+    content: '';
+    transition: opacity $slide-duration ease-out;
+  }
+}
+
+.slide-left-enter,
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-left-enter-to,
+.slide-right-leave {
+  &:after {
+    opacity: 1;
+  }
+}
+
+// Background
+.slide-left-leave-active,
+.slide-right-enter-active {
+  transition: transform $slide-duration ease-out;
+}
+
+.slide-left-leave-to,
+.slide-right-enter {
+  transform: translateX(-30%);
+}

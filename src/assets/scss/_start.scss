@@ -37,40 +37,7 @@ main {
 }
 
 .times-item-time {
-  font-size: 1.5em;
-}
-
-.form-blocks {
-  margin-bottom: rem(#{'var(--space-biggest) * 2'});
-}
-
-.form-block {
-  margin-top: var(--space-rem-bigger);
-
-  &._submit {
-    margin-top: rem(#{'var(--space-bigger) * 2'});
-  }
-}
-
-.form-block-label {
-  display: block;
-  padding-bottom: var(--space-rem-big);
-}
-
-.form-block-hint {
-  color: var(--contrast-darker);
-}
-
-.form-block-controls {
-  display: flex;
-
-  input {
-    width: 100%;
-  }
-}
-
-.form-block-control {
-  flex: auto;
+  font-size: em(24);
 }
 
 .bar {
@@ -101,11 +68,6 @@ main {
   max-width: calc(50% + ((1rem / 16) * var(--screen-padding-x)));
   margin-left: -rem(var(--screen-padding-x));
 
-  // &:focus,
-  // &:hover {
-  //   text-decoration: none;
-  // }
-
   &:focus {
     outline-offset: -3px;
   }
@@ -117,69 +79,21 @@ main {
   }
 }
 
-// Transition
+// Counters
 
-$slide-duration: 0.3s;
-
-.screen {
-  background-color: var(--color-root);
-  transform-origin: 0 50%;
-  will-change: transform;
-  backface-visibility: hidden;
-
-  &:after {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    transform: translateX(-100%);
-    z-index: 98;
-    opacity: 0;
-    background-color: var(--shade-light);
-    will-change: opacity;
-    backface-visibility: hidden;
-  }
+.counter {
+  box-shadow: 0 1px 0 var(--contrast-lightest);
 }
 
-// Foreground
-.slide-left-enter-active,
-.slide-right-leave-active {
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: transform $slide-duration ease-out;
-
-  &:after {
-    content: '';
-    transition: opacity $slide-duration ease-out;
-  }
+.counter-inner {
+  @extend .layout;
+  @include padding-y(rem(16));
 }
 
-.slide-left-enter,
-.slide-right-leave-to {
-  transform: translateX(100%);
-}
-
-.slide-left-enter-to,
-.slide-right-leave {
-  &:after {
-    opacity: 1;
-  }
-}
-
-// Background
-.slide-left-leave-active,
-.slide-right-enter-active {
-  transition: transform $slide-duration ease-out;
-}
-
-.slide-left-leave-to,
-.slide-right-enter {
-  transform: translateX(-30%);
+.counter-count {
+  font-size: min(12vw, em(72));
+  line-height: 1;
+  padding-bottom: rem(var(--space-small));
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
 }

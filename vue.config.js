@@ -22,17 +22,22 @@ module.exports = {
     loaderOptions: {
       sass: {
         sassOptions: {
-          precision: 8,
-        },
-      },
+          precision: 8
+        }
+      }
     },
+    sourceMap: true
   },
   pwa: {
-    name: 'Since Then',
+    name: 'Quando',
     appleMobileWebAppCapable: 'yes',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      swSrc: 'src/serviceWorker.js',
+      swSrc: 'src/serviceWorker.js'
     },
+    msTileColor: '#fff',
+    manifestOptions: {
+      background_color: '#fff'
+    }
   },
 }

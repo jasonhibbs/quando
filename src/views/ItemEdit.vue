@@ -6,7 +6,7 @@
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'Single', params: { id: this.itemId } }"
-        ) ← Back
+        ) Cancel
 
       .bar-block
         h1 Edit Time

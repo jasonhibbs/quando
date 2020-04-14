@@ -9,7 +9,7 @@
         ) Add
 
       .bar-block
-        h1 Times
+        h1 Quando
 
     main
       .layout

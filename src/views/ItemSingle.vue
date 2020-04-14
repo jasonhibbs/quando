@@ -14,22 +14,44 @@
         h1 {{ item.label }}
 
     main
-      .layout
+      template(v-if="item")
+        .layout
+          p
+            time(:datetime="item.datetime") {{ dateString }}
 
-        template(v-if="item")
+          p {{ sentence }}
 
-          p on&puncsp;
-            time(:datetime="item.datetime") {{ new Date(item.datetime).toLocaleString() }}
+        counter(
+          type="seconds"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="minutes"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="hours"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="days"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="weeks"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="months"
+          :milliseconds="milliseconds"
+        )
+        counter(
+          type="years"
+          :milliseconds="milliseconds"
+        )
 
-          p(v-if="totalSeconds") {{ totalSeconds | thousands }} seconds  {{ future ? '' : 'ago' }}
-          p(v-if="totalMinutes") {{ totalMinutes | thousands }} minutes  {{ future ? '' : 'ago' }}
-          p(v-if="totalHours") {{ totalHours | thousands }} hours  {{ future ? '' : 'ago' }}
-          p(v-if="totalDays") {{ totalDays | thousands }} days  {{ future ? '' : 'ago' }}
-          p(v-if="totalWeeks") {{ totalWeeks | thousands }} weeks  {{ future ? '' : 'ago' }}
-          p(v-if="totalMonths") {{ totalMonths | thousands }} months  {{ future ? '' : 'ago' }}
-          p(v-if="totalYears") {{ totalYears | thousands }} years  {{ future ? '' : 'ago' }}
-
-        template(v-else)
+      template(v-else)
+        .layout
           p That doesn’t exist
           p
             router-link(:to="{ name: 'List' }") Go to the list
@@ -39,8 +61,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { formatDistanceStrict } from 'date-fns'
+import Counter from '@/components/Counter.vue'
 
 @Component({
+  components: {
+    Counter,
+  },
   filters: {
     thousands: (n: number) => {
       return n.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -55,7 +81,6 @@ import { formatDistanceStrict } from 'date-fns'
 export default class ItemSingle extends Vue {
   tick: number = 0
   tickInterval: any = null
-  future: boolean = false
 
   get itemId() {
     return this.$route.params.id
@@ -75,6 +100,23 @@ export default class ItemSingle extends Vue {
     clearInterval(this.tickInterval)
   }
 
+  get dateString() {
+    const options = {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    }
+
+    const date = new Date(this.item.datetime).toLocaleString(
+      navigator.language,
+      options
+    )
+
+    return date
+  }
+
   get now() {
     const t = this.tick // force update
     return new Date().getTime()
@@ -84,40 +126,57 @@ export default class ItemSingle extends Vue {
     return new Date(this.item.datetime).getTime()
   }
 
-  get delta() {
+  get milliseconds() {
     const d = this.then - this.now
-    if (d > 0) {
-      this.future = true
-    }
     return d
   }
 
-  get totalSeconds() {
-    return Math.floor(Math.abs(this.delta) / 1000)
-  }
+  get sentence() {
+    const strings: string[] = []
+    let s = Math.abs(this.milliseconds) / 1000
 
-  get totalMinutes() {
-    return Math.floor(this.totalSeconds / 60)
-  }
+    let years = Math.floor(s / 31557600)
+    s -= years * 31557600
+    if (years) {
+      strings.push(`${years} year${years === 1 ? '' : 's'}`)
+    }
 
-  get totalHours() {
-    return Math.floor(this.totalSeconds / 3600)
-  }
+    let months = Math.floor(s / 2629800)
+    s -= months * 2629800
+    if (months) {
+      strings.push(`${months} month${months === 1 ? '' : 's'}`)
+    }
 
-  get totalDays() {
-    return Math.floor(this.totalSeconds / 86400)
-  }
+    let days = Math.floor(s / 86400)
+    s -= days * 86400
+    if (days) {
+      strings.push(`${days} day${days === 1 ? '' : 's'}`)
+    }
 
-  get totalWeeks() {
-    return Math.floor(this.totalSeconds / 604800)
-  }
+    let hours = Math.floor(s / 3600)
+    s -= hours * 3600
+    if (hours) {
+      strings.push(`${hours} hour${hours === 1 ? '' : 's'}`)
+    }
 
-  get totalMonths() {
-    return Math.floor(this.totalSeconds / 2629800)
-  }
+    let minutes = Math.floor(s / 60)
+    s -= minutes * 60
+    if (minutes) {
+      strings.push(`${minutes} minute${minutes === 1 ? '' : 's'}`)
+    }
 
-  get totalYears() {
-    return Math.floor(this.totalSeconds / 31557600)
+    let seconds = Math.floor(s)
+    if (seconds) {
+      strings.push(`${seconds} second${seconds === 1 ? '' : 's'}`)
+    }
+
+    if (this.milliseconds < 0) {
+      const lastIndex = strings.length - 1
+      const suffixString = `${strings[lastIndex]} ago`
+      strings.splice(lastIndex, 1, suffixString)
+    }
+
+    return strings.join(', ')
   }
 }
 </script>
