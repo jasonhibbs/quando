@@ -41,7 +41,7 @@
             form-block-select#select-timezone(
               v-model="timezoneSelected"
             )
-              template(#default) Time
+              template(#default) Timezone
               template(#options)
                 optgroup(label="Local")
                   option(value="") {{ user.timezone }}

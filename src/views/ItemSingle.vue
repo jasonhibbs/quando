@@ -105,13 +105,16 @@ export default class ItemSingle extends Vue {
 
   get dateString() {
     const options = {
-      dateStyle: 'full',
-      timeStyle: 'long',
-      // year: '2-digit',
-      // month: '2-digit',
-      // day: '2-digit',
-      // hour: '2-digit',
-      // minute: '2-digit',
+      timeZone: this.item.timezone,
+      // dateStyle: 'full',
+      // timeStyle: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZoneName: 'short',
     }
 
     const date = new Date(this.item.datetime).toLocaleString(

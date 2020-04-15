@@ -42,8 +42,11 @@ main {
   }
 }
 
+.times-item-label {
+  font-size: min(max(1rem, 5vw), em(32));
+}
 .times-item-time {
-  font-size: em(24);
+  font-size: min(max(1.5rem, 8vw), em(48));
 }
 
 .bar {
@@ -70,9 +73,16 @@ main {
 .bar-button {
   flex: auto;
   line-height: (20/16);
+  border: none;
   padding: rem(12) rem(var(--screen-padding-x));
   max-width: calc(50% + ((1rem / 16) * var(--screen-padding-x)));
   margin-left: -rem(var(--screen-padding-x));
+
+  &,
+  &:focus,
+  &:hover {
+    background-color: transparent;
+  }
 
   &:focus {
     outline-offset: -3px;
@@ -83,6 +93,10 @@ main {
     margin-left: auto;
     margin-right: -rem(var(--screen-padding-x));
   }
+}
+
+button.bar-button {
+  @include focus-outline($offset: -3px);
 }
 
 // Counters

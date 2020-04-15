@@ -20,7 +20,7 @@
     margin-top: 0;
 
     & + .form-block {
-      margin-left: rem(var(--space-smaller));
+      margin-left: rem(var(--space-small));
     }
   }
 }
@@ -36,6 +36,14 @@
 
 .form-block-controls {
   display: flex;
+
+  button,
+  .button {
+    & + button,
+    & + .button {
+      margin-left: var(--space-rem-small);
+    }
+  }
 }
 
 .form-block-control {

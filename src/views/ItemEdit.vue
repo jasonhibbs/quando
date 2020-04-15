@@ -8,6 +8,10 @@
           :to="{ name: 'Single', params: { id: this.itemId } }"
         ) Cancel
 
+        button.bar-button._end._bad(
+          @click="onClickButtonDelete"
+        ) Delete
+
       .bar-block
         h1 Edit Time
 
@@ -41,7 +45,7 @@
             form-block-select#select-timezone(
               v-model="timezoneSelected"
             )
-              template(#default) Time
+              template(#default) Timezone
               template(#options)
                 optgroup(label="Local")
                   option(value="") {{ user.timezone }}
@@ -55,18 +59,18 @@
                   ) {{ zone.label }}
 
           .form-block._submit
-            //- .form-block-hint
-              p ID is {{itemId}}
-              p Label is {{ modelLabel }}
-              p Date is {{ modelDatetime }}
             .form-block-controls
+              router-link.button(
+                :to="{ name: 'Single', params: { id: this.itemId } }"
+              ) Cancel
+
               button(
                 type="submit"
                 :disabled="!isModelValid || !isModelDifferent"
               )
                 .button-label Save Changes
 
-        .zone-danger
+        //- .zone-danger
           h2 Danger Zone
           button._bad(
             type="button"

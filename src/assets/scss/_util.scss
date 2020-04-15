@@ -43,6 +43,11 @@
   outline: 0 solid transparent;
   outline-offset: $offset;
 
+  &,
+  &:focus {
+    box-shadow: none;
+  }
+
   &:focus {
     outline-width: $width;
     outline-color: $color;
