@@ -15,11 +15,14 @@
 
     main
       template(v-if="item")
-        .layout
-          p
+
+        .list-item.date-item
+          .list-item-inner
             time(:datetime="item.datetime") {{ dateString }}
 
-          p {{ sentence }}
+        .list-item.sentence-item
+          .list-item-inner
+            p {{ sentence }}
 
         counter(
           type="seconds"
@@ -102,11 +105,13 @@ export default class ItemSingle extends Vue {
 
   get dateString() {
     const options = {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
+      dateStyle: 'full',
+      timeStyle: 'long',
+      // year: '2-digit',
+      // month: '2-digit',
+      // day: '2-digit',
+      // hour: '2-digit',
+      // minute: '2-digit',
     }
 
     const date = new Date(this.item.datetime).toLocaleString(
@@ -132,47 +137,30 @@ export default class ItemSingle extends Vue {
   }
 
   get sentence() {
+    let seconds = Math.abs(this.milliseconds) / 1000
     const strings: string[] = []
-    let s = Math.abs(this.milliseconds) / 1000
+    const units = [
+      { label: 'years', divisor: 31557600 },
+      { label: 'months', divisor: 2629800 },
+      { label: 'days', divisor: 86400 },
+      { label: 'hours', divisor: 3600 },
+      { label: 'minutes', divisor: 60 },
+      { label: 'seconds', divisor: 0 },
+    ]
 
-    let years = Math.floor(s / 31557600)
-    s -= years * 31557600
-    if (years) {
-      strings.push(`${years} year${years === 1 ? '' : 's'}`)
-    }
-
-    let months = Math.floor(s / 2629800)
-    s -= months * 2629800
-    if (months) {
-      strings.push(`${months} month${months === 1 ? '' : 's'}`)
-    }
-
-    let days = Math.floor(s / 86400)
-    s -= days * 86400
-    if (days) {
-      strings.push(`${days} day${days === 1 ? '' : 's'}`)
-    }
-
-    let hours = Math.floor(s / 3600)
-    s -= hours * 3600
-    if (hours) {
-      strings.push(`${hours} hour${hours === 1 ? '' : 's'}`)
-    }
-
-    let minutes = Math.floor(s / 60)
-    s -= minutes * 60
-    if (minutes) {
-      strings.push(`${minutes} minute${minutes === 1 ? '' : 's'}`)
-    }
-
-    let seconds = Math.floor(s)
-    if (seconds) {
-      strings.push(`${seconds} second${seconds === 1 ? '' : 's'}`)
-    }
+    units.forEach(unit => {
+      let total = Math.floor(seconds / (unit.divisor || 1))
+      seconds -= total * unit.divisor
+      if (total) {
+        const unitLabel =
+          total === 1 ? unit.label.substr(0, unit.label.length - 1) : unit.label
+        strings.push(`${total} ${unitLabel}`)
+      }
+    })
 
     if (this.milliseconds < 0) {
       const lastIndex = strings.length - 1
-      const suffixString = `${strings[lastIndex]} ago`
+      const suffixString = `${strings[lastIndex]} ago`
       strings.splice(lastIndex, 1, suffixString)
     }
 

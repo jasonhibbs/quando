@@ -10,11 +10,22 @@ main {
   color: var(--contrast-darker);
 }
 
-.times-item {
+.list-item {
   display: block;
   box-shadow: 0 1px 0 var(--contrast-lightest);
 
-  // margin: 0 0 var(--space-rem-biggest);
+  &-inner {
+    @extend .layout;
+    @include padding-y(rem(16));
+  }
+}
+
+.times-item {
+  @extend .list-item;
+
+  &-inner {
+    @extend .list-item-inner;
+  }
 
   &,
   &:focus,
@@ -29,11 +40,6 @@ main {
   &:focus {
     outline-offset: -3px;
   }
-}
-
-.times-item-inner {
-  @extend .layout;
-  @include padding-y(rem(16));
 }
 
 .times-item-time {
@@ -82,18 +88,37 @@ main {
 // Counters
 
 .counter {
-  box-shadow: 0 1px 0 var(--contrast-lightest);
-}
+  @extend .list-item;
 
-.counter-inner {
-  @extend .layout;
-  @include padding-y(rem(16));
+  &-inner {
+    @extend .list-item-inner;
+  }
 }
 
 .counter-count {
-  font-size: min(12vw, em(72));
+  font-size: min(max(1rem, 12vw), em(72));
   line-height: 1;
   padding-bottom: rem(var(--space-smaller));
   font-feature-settings: 'tnum' 1;
   font-variant-numeric: tabular-nums;
+}
+
+// .counter-unit {
+//   text-transform: uppercase;
+//   font-size: em(13);
+//   letter-spacing: em(300, 1000);
+// }
+
+.date-item {
+  time {
+    font-size: min(max(1rem, 3vw), em(24));
+    margin: 0;
+  }
+}
+
+.sentence-item {
+  p {
+    font-size: min(max(1rem, 5vw), em(36));
+    margin: 0;
+  }
 }
