@@ -10,15 +10,18 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState } from 'vuex'
 
 @Component({
-  components: {
-    HelloWorld,
-  },
+  computed: mapState(['user']),
 })
 export default class App extends Vue {
+  user!: any
   transitionName: string = 'default'
+
+  mounted() {
+    this.user.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
 
   @Watch('$route') onRouteChange(to: any, from: any) {
     const toDepth = to.path.split('/').length

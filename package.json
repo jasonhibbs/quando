@@ -12,6 +12,7 @@
     "@types/uuid": "^7.0.2",
     "core-js": "^3.6.4",
     "date-fns": "^2.11.1",
+    "date-fns-tz": "^1.0.10",
     "normalize.css": "^8.0.1",
     "register-service-worker": "^1.7.1",
     "uuid": "^7.0.3",

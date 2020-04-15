@@ -101,6 +101,7 @@ main {
   padding-bottom: rem(var(--space-smaller));
   font-feature-settings: 'tnum' 1;
   font-variant-numeric: tabular-nums;
+  text-indent: (1em/-20);
 }
 
 // .counter-unit {
