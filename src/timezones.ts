@@ -77,10 +77,10 @@ export const TIMEZONES: {
         label: 'Argentina/Buenos Aires',
       },
       { value: 'America/Argentina/Catamarca', label: 'Argentina/Catamarca' },
-      {
-        value: 'America/Argentina/ComodRivadavia',
-        label: 'Argentina/Comodoro Rivadavia',
-      },
+      // {
+      //   value: 'America/Argentina/ComodRivadavia',
+      //   label: 'Argentina/Comodoro Rivadavia',
+      // },
       { value: 'America/Argentina/Cordoba', label: 'Argentina/Cordoba' },
       { value: 'America/Argentina/Jujuy', label: 'Argentina/Jujuy' },
       { value: 'America/Argentina/La_Rioja', label: 'Argentina/La Rioja' },
