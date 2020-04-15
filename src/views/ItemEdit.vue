@@ -29,12 +29,30 @@
             v-model="modelDate"
           ) Date
 
-          form-block-input#input-time(
-            type="time"
-            placeholder="HH:MM"
-            required
-            v-model="modelTime"
-          ) Time
+          .form-block._inline
+
+            form-block-input#input-time(
+              type="time"
+              placeholder="HH:MM"
+              required
+              v-model="modelTime"
+            ) Time
+
+            form-block-select#select-timezone(
+              v-model="timezoneSelected"
+            )
+              template(#default) Time
+              template(#options)
+                optgroup(label="Local")
+                  option(value="") {{ user.timezone }}
+                optgroup(
+                  v-for="group in timezoneOptions"
+                  :label="group.label"
+                )
+                  option(
+                    v-for="zone in group.zones"
+                    :value="zone.value"
+                  ) {{ zone.label }}
 
           .form-block._submit
             //- .form-block-hint
@@ -59,15 +77,29 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { mapState } from 'vuex'
+import { lightFormat } from 'date-fns'
+import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
+import { TIMEZONES } from '@/timezones.ts'
 import FormBlockInput from '@/components/FormBlockInput.vue'
+import FormBlockSelect from '@/components/FormBlockSelect.vue'
 
 @Component({
-  components: { FormBlockInput },
+  components: {
+    FormBlockInput,
+    FormBlockSelect,
+  },
+  computed: mapState(['user']),
 })
 export default class ItemNew extends Vue {
+  user!: any
   modelLabel: string = ''
   modelDate: string = ''
   modelTime: string = ''
+  timezoneSelected = ''
+  timezoneOptions = TIMEZONES
+
+  // Lifecycle
 
   mounted() {
     if (!this.item) {
@@ -77,14 +109,18 @@ export default class ItemNew extends Vue {
     this.setupModel()
   }
 
-  get placeholder() {
-    return 'It happened'
-  }
+  // Setup
 
   setupModel() {
     this.modelLabel = this.item.label
-    this.modelDate = this.item.datetime.slice(0, 10)
-    this.modelTime = this.item.datetime.slice(11, 16)
+    this.timezoneSelected = this.item.timezone || ''
+    const zonedTime = utcToZonedTime(this.item.datetime, this.modelTimezone)
+    this.modelDate = lightFormat(zonedTime, 'yyyy-MM-dd')
+    this.modelTime = lightFormat(zonedTime, 'HH:mm:ss')
+  }
+
+  get placeholder() {
+    return 'It happened'
   }
 
   get itemId() {
@@ -95,19 +131,28 @@ export default class ItemNew extends Vue {
     return this.$store.getters.getItemById(this.itemId)
   }
 
+  get modelTimezone() {
+    return this.timezoneSelected || this.user.timezone
+  }
+
+  get modelDatetime() {
+    if (!this.isDateValid) return ''
+    return zonedTimeToUtc(
+      `${this.modelDate} ${this.modelTime}`,
+      this.modelTimezone
+    ).toISOString()
+  }
+
   get updatedItem() {
     return {
       id: this.itemId,
       label: this.modelLabel,
       datetime: this.modelDatetime,
+      timezone: this.modelTimezone,
     }
   }
 
-  get modelDatetime() {
-    return this.modelDate
-      ? `${this.modelDate}T${this.modelTime || '00:00'}:00Z`
-      : ''
-  }
+  // Validation
 
   get isDateValid() {
     return !isNaN(Date.parse(this.modelDate))
@@ -124,8 +169,11 @@ export default class ItemNew extends Vue {
   get isModelDifferent() {
     const labelChanged = this.item.label !== this.modelLabel
     const datetimeChanged = this.item.datetime !== this.modelDatetime
-    return labelChanged || datetimeChanged
+    const timezoneChanged = this.item.timezone !== this.modelTimezone
+    return labelChanged || datetimeChanged || timezoneChanged
   }
+
+  // Events
 
   onSubmit() {
     if (this.isModelValid) {

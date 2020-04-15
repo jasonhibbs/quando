@@ -15,11 +15,15 @@ const vuexLocalStorage = new VuexPersistence({
 export default new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    user: {
+      timezone: 'Europe/London',
+    },
     items: [
       {
         id: 'B86A31DD-46D3-4B5E-948D-C1428BC546C2',
         label: 'I was born',
         datetime: '1989-03-25T00:18:00Z',
+        timezone: 'Europe/London',
       },
     ],
   },
