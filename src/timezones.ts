@@ -77,10 +77,10 @@ export const TIMEZONES: {
         label: 'Argentina/Buenos Aires',
       },
       { value: 'America/Argentina/Catamarca', label: 'Argentina/Catamarca' },
-      {
-        value: 'America/Argentina/ComodRivadavia',
-        label: 'Argentina/Comodoro Rivadavia',
-      },
+      // {
+      //   value: 'America/Argentina/ComodRivadavia',
+      //   label: 'Argentina/Comodoro Rivadavia',
+      // },
       { value: 'America/Argentina/Cordoba', label: 'Argentina/Cordoba' },
       { value: 'America/Argentina/Jujuy', label: 'Argentina/Jujuy' },
       { value: 'America/Argentina/La_Rioja', label: 'Argentina/La Rioja' },
@@ -251,7 +251,7 @@ export const TIMEZONES: {
     zones: [
       { value: 'Antarctica/Casey', label: 'Casey' },
       { value: 'Antarctica/Davis', label: 'Davis' },
-      { value: 'Antarctica/DumontDUrville', label: 'Dumont d’Urville' },
+      // { value: 'Antarctica/DumontDUrville', label: 'Dumont d’Urville' },
       { value: 'Antarctica/Macquarie', label: 'Macquarie' },
       { value: 'Antarctica/Mawson', label: 'Mawson' },
       { value: 'Antarctica/McMurdo', label: 'McMurdo' },
