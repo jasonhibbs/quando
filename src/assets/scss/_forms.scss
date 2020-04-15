@@ -43,7 +43,9 @@
   flex: auto;
   min-width: 0;
 
-  input {
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
     flex: auto;
     max-width: 100%;
   }
