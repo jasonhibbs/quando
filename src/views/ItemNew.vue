@@ -25,6 +25,8 @@
           form-block-input#input-date(
             type="date"
             placeholder="YYYY-MM-DD"
+            min="0101-01-01"
+            max="9999-12-31"
             required
             v-model="modelDate"
           ) Date

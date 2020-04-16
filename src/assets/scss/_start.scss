@@ -5,6 +5,12 @@ main {
   padding-bottom: rem(120);
 }
 
+.tabular {
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
+  text-indent: (1em/-20);
+}
+
 .list-copy {
   @extend .layout;
   color: var(--contrast-darker);
@@ -51,10 +57,11 @@ main {
 
 .bar {
   min-height: rem(44);
+  background-color: var(--color-root-backdrop);
+  backdrop-filter: blur(30px);
   box-shadow: 0 1px 0 var(--contrast-lighter);
   position: sticky;
   top: 0;
-  background-color: var(--color-root);
   z-index: 1;
   -webkit-overflow-scrolling: auto;
 }
@@ -103,6 +110,7 @@ button.bar-button {
 
 .counter {
   @extend .list-item;
+  overflow: auto;
 
   &-inner {
     @extend .list-item-inner;
@@ -113,9 +121,7 @@ button.bar-button {
   font-size: min(max(1rem, 12vw), em(72));
   line-height: 1;
   padding-bottom: rem(var(--space-smaller));
-  font-feature-settings: 'tnum' 1;
-  font-variant-numeric: tabular-nums;
-  text-indent: (1em/-20);
+  @extend .tabular;
 }
 
 // .counter-unit {
@@ -133,7 +139,7 @@ button.bar-button {
 
 .sentence-item {
   p {
-    font-size: min(max(1rem, 5vw), em(36));
+    font-size: min(max(rem(18), 6vw), em(36));
     margin: 0;
   }
 }

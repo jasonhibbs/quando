@@ -22,7 +22,7 @@
 
         .list-item.sentence-item
           .list-item-inner
-            p {{ sentence }}
+            p(v-html="sentence")
 
         counter(
           type="seconds"
@@ -157,7 +157,7 @@ export default class ItemSingle extends Vue {
       if (total) {
         const unitLabel =
           total === 1 ? unit.label.substr(0, unit.label.length - 1) : unit.label
-        strings.push(`${total} ${unitLabel}`)
+        strings.push(`<span class="tabular">${total}</span> ${unitLabel}`)
       }
     })
 
