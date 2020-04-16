@@ -31,6 +31,7 @@ module.exports = {
   pwa: {
     name: 'Quando',
     appleMobileWebAppCapable: 'yes',
+    appleTouchIcon: 'img/icons/apple-touch-icon.png',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/serviceWorker.js',
