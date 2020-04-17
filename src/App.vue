@@ -19,8 +19,23 @@ export default class App extends Vue {
   user!: any
   transitionName: string = 'default'
 
+  queryDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
+
   mounted() {
     this.user.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    this.onDarkModeChange(this.queryDarkMode)
+    this.queryDarkMode.addListener(this.onDarkModeChange)
+  }
+
+  onDarkModeChange(query: any) {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+    if (metaThemeColor) {
+      if (query.matches) {
+        metaThemeColor.setAttribute('content', '#000')
+      } else {
+        metaThemeColor.setAttribute('content', '#fff')
+      }
+    }
   }
 
   @Watch('$route') onRouteChange(to: any, from: any) {

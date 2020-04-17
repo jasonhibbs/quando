@@ -30,7 +30,7 @@ module.exports = {
   },
   pwa: {
     name: 'Quando',
-    themeColor: 'transparent',
+    themeColor: '#fff',
     appleMobileWebAppCapable: 'yes',
     iconPaths: {
       appleTouchIcon: 'img/icons/apple-touch-icon.png',
