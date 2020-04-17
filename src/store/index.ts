@@ -20,8 +20,8 @@ export default new Vuex.Store({
     },
     items: [
       {
-        id: 'B86A31DD-46D3-4B5E-948D-C1428BC546C2',
-        label: 'I was born',
+        id: '00000000-0000-0000-0000-000000000000',
+        label: 'For example',
         datetime: '1989-03-25T00:18:00Z',
         timezone: 'Europe/London',
       },

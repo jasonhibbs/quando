@@ -42,6 +42,10 @@
     --button-bad-focus-color: var(--color-error-50);
   }
 
+  ::selection {
+    background-color: mix($color-black, $color-key, 30);
+  }
+
   a {
     &:focus,
     &:hover {
