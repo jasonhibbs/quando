@@ -41,7 +41,7 @@ module.exports = {
     msTileColor: '#4477ee',
     manifestOptions: {
       background_color: '#fff',
-      theme_color: 'transparent',
+      theme_color: '#b3c8f8',
     },
   },
 }
