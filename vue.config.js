@@ -38,9 +38,10 @@ module.exports = {
     workboxOptions: {
       swSrc: 'src/serviceWorker.js',
     },
-    msTileColor: '#fff',
+    msTileColor: '#4477ee',
     manifestOptions: {
       background_color: '#fff',
+      theme_color: 'transparent',
     },
   },
 }
