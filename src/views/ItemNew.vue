@@ -18,7 +18,7 @@
             type="text"
             required
             :placeholder="placeholder"
-            v-model="modelLabel"
+            v-model="model.label"
           ) Label
 
 
@@ -28,7 +28,7 @@
             min="0101-01-01"
             max="9999-12-31"
             required
-            v-model="modelDate"
+            v-model="model.date"
           ) Date
 
           .form-block._inline
@@ -37,11 +37,11 @@
               type="time"
               placeholder="HH:MM"
               required
-              v-model="modelTime"
+              v-model="model.time"
             ) Time
 
             form-block-select#select-timezone(
-              v-model="timezoneSelected"
+              v-model="model.timezone"
             )
               template(#default) Timezone
               template(#options)
@@ -59,7 +59,7 @@
           .form-block._submit
             //- .form-block-hint
               p ID is {{modelId}}
-              p Label is {{ modelLabel }}
+              p Label is {{ model.label }}
               p Date is {{ modelDatetime }}
             .form-block-controls
               button(
@@ -89,10 +89,15 @@ import FormBlockSelect from '@/components/FormBlockSelect.vue'
 })
 export default class ItemNew extends Vue {
   user!: any
-  modelId: string = uuidv4()
-  modelLabel: string = ''
-  modelDate: string = new Date().toISOString().slice(0, 10)
-  modelTime: string = '00:00'
+
+  model = {
+    id: uuidv4(),
+    label: '',
+    date: new Date().toISOString().slice(0, 10),
+    time: '00:00',
+    timezone: '',
+  }
+
   timezoneSelected = ''
   timezoneOptions = TIMEZONES
 
@@ -104,21 +109,21 @@ export default class ItemNew extends Vue {
 
   get item() {
     return {
-      id: this.modelId,
-      label: this.modelLabel,
+      id: this.model.id,
+      label: this.model.label,
       datetime: this.modelDatetime,
       timezone: this.modelTimezone,
     }
   }
 
   get modelTimezone() {
-    return this.timezoneSelected || this.user.timezone
+    return this.model.timezone || this.user.timezone
   }
 
   get modelDatetime() {
     if (!this.isDateValid) return ''
     return zonedTimeToUtc(
-      `${this.modelDate} ${this.modelTime}`,
+      `${this.model.date} ${this.model.time}`,
       this.modelTimezone
     ).toISOString()
   }
@@ -126,7 +131,7 @@ export default class ItemNew extends Vue {
   // Validation
 
   get isDateValid() {
-    return !isNaN(Date.parse(this.modelDate))
+    return !isNaN(Date.parse(this.model.date))
   }
 
   get isDatetimeValid() {
@@ -134,7 +139,7 @@ export default class ItemNew extends Vue {
   }
 
   get isModelValid() {
-    return this.modelLabel && this.modelDatetime && this.isDatetimeValid
+    return this.model.label && this.modelDatetime && this.isDatetimeValid
   }
 
   // Events
@@ -142,7 +147,7 @@ export default class ItemNew extends Vue {
   onSubmit() {
     if (this.isModelValid) {
       this.$store.commit('addItem', this.item)
-      this.$router.push({ name: 'Single', params: { id: this.modelId } })
+      this.$router.push({ name: 'Single', params: { id: this.model.id } })
     }
   }
 }

@@ -90,7 +90,7 @@ input[type='time'] {
     margin: 0;
   }
   &::-webkit-datetime-edit {
-    min-width: 3em;
+    min-width: em(52);
   }
   &::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
