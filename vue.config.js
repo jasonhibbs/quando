@@ -30,6 +30,7 @@ module.exports = {
   },
   pwa: {
     name: 'Quando',
+    backgroundColor: 'transparent',
     appleMobileWebAppCapable: 'yes',
     iconPaths: {
       appleTouchIcon: 'img/icons/apple-touch-icon.png',
@@ -41,7 +42,7 @@ module.exports = {
     msTileColor: '#4477ee',
     manifestOptions: {
       background_color: '#fff',
-      theme_color: '#b3c8f8',
+      theme_color: 'transparent',
     },
   },
 }
