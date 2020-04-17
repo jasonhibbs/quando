@@ -5,6 +5,10 @@ main {
   padding-bottom: rem(120);
 }
 
+input {
+  scroll-margin-top: em((92 + 28 + 8)); // bar + label + extra
+}
+
 .tabular {
   font-feature-settings: 'tnum' 1;
   font-variant-numeric: tabular-nums;
