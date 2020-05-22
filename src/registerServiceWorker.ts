@@ -19,8 +19,11 @@ if (process.env.NODE_ENV === 'production') {
     updatefound() {
       console.log('New content is downloading.')
     },
-    updated() {
+    updated(worker: any) {
       console.log('New content is available; please refresh.')
+      document.dispatchEvent(
+        new CustomEvent('workerupdated', { detail: worker })
+      )
     },
     offline() {
       console.log(

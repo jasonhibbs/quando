@@ -13,18 +13,43 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 
 @Component({
-  computed: mapState(['user']),
+  computed: mapState(['user', 'ui']),
 })
 export default class App extends Vue {
   user!: any
+  ui!: any
   transitionName: string = 'default'
 
   queryDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
+  isStandalone = window.matchMedia('(display-mode: standalone)').matches
+  isIos = /iPhone|iPad|iPod/.test(navigator.userAgent)
+
+  beforeCreate() {
+    if (this.isStandalone) {
+      document.documentElement.classList.add('is-app')
+    }
+    if (this.isIos) {
+      document.documentElement.classList.add('is-ios')
+    }
+  }
+
+  created() {
+    document.addEventListener('workerupdated', this.onWorkerUpdated)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (this.ui.reloading) return
+      this.ui.reloading = true
+      location.reload()
+    })
+  }
 
   mounted() {
     this.user.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
     this.onDarkModeChange(this.queryDarkMode)
     this.queryDarkMode.addListener(this.onDarkModeChange)
+  }
+
+  onWorkerUpdated(e: any) {
+    this.$store.commit('workerFoundUpdate', e.detail)
   }
 
   onDarkModeChange(query: any) {

@@ -15,6 +15,11 @@ const vuexLocalStorage = new VuexPersistence({
 export default new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    ui: {
+      reloading: false,
+      worker: null,
+      updateAvailable: false,
+    },
     user: {
       timezone: 'Europe/London',
     },
@@ -43,6 +48,10 @@ export default new Vuex.Store({
     removeItemById(state, id) {
       const i = state.items.findIndex(item => item.id === id)
       state.items.splice(i, 1)
+    },
+    workerFoundUpdate(state, worker) {
+      state.ui.worker = worker
+      state.ui.updateAvailable = true
     },
   },
   actions: {},
