@@ -1,7 +1,7 @@
 // Controls ————————————————————————————————————————————————————————————
 
-$icon_arrow-down-dark: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm93LWRvd24tYmxhY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDY0IDQwIj48ZyBvcGFjaXR5PSIwLjM1Ij48cGF0aCBkPSJNNjMuMzYsOC40N0wzMy40NywzOC4zNmEyLDIsMCwwLDEtMi45NSwwTDAuNjQsOC40N0EyLjIxLDIuMjEsMCwwLDEsMCw3LDIuMjEsMi4yMSwwLDAsMSwuNjQsNS41M0wzLjg1LDIuMzJhMi4wOSwyLjA5LDAsMCwxLDEuNDctLjY0LDIuMjEsMi4yMSwwLDAsMSwxLjQ3LjY0TDMyLDI3LjUyLDU3LjIsMi4zMmEyLDIsMCwwLDEsMi45NSwwbDMuMjEsMy4yMUEyLjIxLDIuMjEsMCwwLDEsNjQsNywyLjIxLDIuMjEsMCwwLDEsNjMuMzYsOC40N1oiIGZpbGw9IiMwMDAiLz48L2c+PC9zdmc+Cg==);
-$icon_arrow-down-light: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm93LWRvd24td2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDY0IDQwIj48ZyBvcGFjaXR5PSIwLjM1Ij48cGF0aCBkPSJNNjMuMzYsOC40N0wzMy40NywzOC4zNmEyLDIsMCwwLDEtMi45NSwwTDAuNjQsOC40N0EyLjIxLDIuMjEsMCwwLDEsMCw3LDIuMjEsMi4yMSwwLDAsMSwuNjQsNS41M0wzLjg1LDIuMzJhMi4wOSwyLjA5LDAsMCwxLDEuNDctLjY0LDIuMjEsMi4yMSwwLDAsMSwxLjQ3LjY0TDMyLDI3LjUyLDU3LjIsMi4zMmEyLDIsMCwwLDEsMi45NSwwbDMuMjEsMy4yMUEyLjIxLDIuMjEsMCwwLDEsNjQsNywyLjIxLDIuMjEsMCwwLDEsNjMuMzYsOC40N1oiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+Cg==);
+$icon_arrow-down-dark: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><path opacity='.35' d='M63.36 8.47L33.47 38.36a2 2 0 01-2.95 0L.64 8.47A2.21 2.21 0 010 7a2.21 2.21 0 01.64-1.47l3.21-3.21a2.09 2.09 0 011.47-.64 2.21 2.21 0 011.47.64L32 27.52l25.2-25.2a2 2 0 012.95 0l3.21 3.21A2.21 2.21 0 0164 7a2.21 2.21 0 01-.64 1.47z'/></svg>");
+$icon_arrow-down-light: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><path opacity='.35' fill='#fff' d='M63.36 8.47L33.47 38.36a2 2 0 01-2.95 0L.64 8.47A2.21 2.21 0 010 7a2.21 2.21 0 01.64-1.47l3.21-3.21a2.09 2.09 0 011.47-.64 2.21 2.21 0 011.47.64L32 27.52l25.2-25.2a2 2 0 012.95 0l3.21 3.21A2.21 2.21 0 0164 7a2.21 2.21 0 01-.64 1.47z'/></svg>");
 
 :root {
   --controls-radius: 2px;
@@ -13,6 +13,13 @@ $icon_arrow-down-light: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm
   --input-border-color: transparent;
   --input-hover-border-color: var(--color-key);
   --input-focus-color: var(--color-focus);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 // Placeholders
@@ -89,12 +96,23 @@ input[type='time'] {
     height: 0;
     margin: 0;
   }
-  &::-webkit-datetime-edit {
-    min-width: em(52);
+
+  &::-webkit-calendar-picker-indicator {
+    width: em(20);
+    height: em(20);
+    padding: rem(8);
+    margin: rem(-8);
+    margin-inline-start: 0;
   }
+
   &::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
   }
+
+  &::-webkit-datetime-edit {
+    min-width: em(52);
+  }
+
   &::-webkit-datetime-edit-minute-field,
   &::-webkit-datetime-edit-hour-field,
   &::-webkit-datetime-edit-day-field,
@@ -110,7 +128,7 @@ input[type='time'] {
   @extend %input-base;
 
   appearance: none;
-  background-image: $icon_arrow-down-dark;
+
   background-position: right rem(var(--padding-x)) center;
   background-repeat: no-repeat;
   background-size: rem(9.5) auto;
@@ -120,6 +138,10 @@ input[type='time'] {
     height: auto;
     padding-right: rem(var(--padding-x));
     background-image: none;
+  }
+
+  &:not([multiple]):not([size]) {
+    background-image: $icon_arrow-down-dark;
   }
 }
 

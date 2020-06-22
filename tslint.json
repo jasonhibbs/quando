@@ -5,20 +5,21 @@
     "exclude": ["node_modules/**"]
   },
   "rules": {
-    "quotemark": [true, "single"],
+    "array-type": [true, "array"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "curly": [true, "ignore-same-line"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
-    "ordered-imports": false,
-    "object-literal-sort-keys": false,
-    "no-consecutive-blank-lines": false,
-    "semicolon": false,
+    "max-classes-per-file": [true, 10],
+    "max-line-length": false,
     "member-access": [true, "no-public"],
     "member-ordering": false,
-    "trailing-comma": true,
-    "arrow-parens": [true, "ban-single-arg-parens"],
-    "max-classes-per-file": [true, 10],
-    "curly": [true, "ignore-same-line"],
-    "max-line-length": false,
-    "no-console": false
+    "no-consecutive-blank-lines": false,
+    "no-console": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [true, "single"],
+    "semicolon": false,
+    "trailing-comma": true
   }
 }

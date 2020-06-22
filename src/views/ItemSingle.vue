@@ -152,7 +152,7 @@ export default class ItemSingle extends Vue {
     ]
 
     units.forEach(unit => {
-      let total = Math.floor(seconds / (unit.divisor || 1))
+      const total = Math.floor(seconds / (unit.divisor || 1))
       seconds -= total * unit.divisor
       if (total) {
         const unitLabel =
