@@ -20,45 +20,6 @@ input {
   color: var(--contrast-darker);
 }
 
-.list-item {
-  display: block;
-  box-shadow: 0 1px 0 var(--contrast-lightest);
-
-  &-inner {
-    @extend .layout;
-    @include padding-y(rem(16));
-  }
-}
-
-.times-item {
-  @extend .list-item;
-
-  &-inner {
-    @extend .list-item-inner;
-  }
-
-  &,
-  &:focus,
-  &:hover {
-    color: var(--color-text);
-  }
-
-  &:hover {
-    background-color: var(--contrast-lightest);
-  }
-
-  &:focus {
-    outline-offset: -3px;
-  }
-}
-
-.times-item-label {
-  font-size: clamp(1rem, 5vw, em(32));
-}
-.times-item-time {
-  font-size: clamp(1.5rem, 8vw, em(48));
-}
-
 .bar {
   min-height: rem(44);
   background-color: var(--color-root-backdrop);
@@ -111,6 +72,20 @@ button.bar-button {
   @include focus-outline($offset: -3px);
 }
 
+.list-item {
+  display: block;
+  box-shadow: 0 1px 0 var(--contrast-lightest);
+
+  &-inner {
+    width: var(--layout-base);
+    max-width: var(--layout-measure);
+    margin: 0 auto;
+    padding: rem(16) 0;
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
 // Counters
 
 .counter {
@@ -153,16 +128,4 @@ button.bar-button {
 
 .form-block-timezone {
   flex: none;
-}
-
-.screen.item-new {
-  & .times-item {
-    background-color: var(--color-root);
-    border-radius: 8px;
-    box-shadow: 0 0 0 1px var(--shade-lightest), 0 1px 1rem var(--shade-lighter);
-  }
-
-  & .times-item-inner {
-    @include padding-x(rem(18));
-  }
 }
