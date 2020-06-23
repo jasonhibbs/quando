@@ -38,19 +38,25 @@
                     v-model="model.timezone"
                   )
 
-          form-block-input#input-label(
-            type="text"
-            required
-            :placeholder="placeholder"
-            v-model="model.label"
-          ) Label
+          .form-block._inline
 
-          .form-block
+            form-block-input#input-label(
+              type="text"
+              required
+              :placeholder="placeholder"
+              v-model="model.label"
+            ) Label
+
+            form-block-select#input-display(
+              :options="displayOptions"
+              v-model="model.display"
+            ) Units
+
+          .form-block._section
             h2 Preview
-            .times-item
-              .times-item-inner
-                .times-item-label {{ model.label || this.placeholder }}
-                .times-item-time {{ distanceString }}
+            list-item-time(
+              :time="preview"
+            )
 
           .form-block._submit
             .form-block-controls
@@ -71,12 +77,14 @@ import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
 import SelectTimezone from '@/components/SelectTimezone.vue'
+import ListItemTime from '@/components/ListItemTime.vue'
 
 @Component({
   components: {
     FormBlockInput,
     FormBlockSelect,
     SelectTimezone,
+    ListItemTime,
   },
   computed: mapState(['user']),
 })
@@ -89,9 +97,16 @@ export default class ItemNew extends Vue {
     date: new Date().toISOString().slice(0, 10),
     time: '00:00',
     timezone: '',
+    display: 'auto',
   }
 
-  timezoneSelected = ''
+  displayOptions = [
+    { label: 'Auto', value: 'auto' },
+    { label: 'Seconds', value: 'second' },
+    { label: 'Minutes', value: 'minute' },
+    { label: 'Days', value: 'day' },
+    { label: 'Month', value: 'month' },
+  ]
 
   // Setup
 
@@ -105,6 +120,17 @@ export default class ItemNew extends Vue {
       label: this.model.label,
       datetime: this.modelDatetime,
       timezone: this.modelTimezone,
+      display: this.model.display || 'auto',
+    }
+  }
+
+  get preview() {
+    const { datetime, timezone, display } = this.item
+    return {
+      label: this.model.label || this.placeholder,
+      datetime,
+      timezone,
+      display,
     }
   }
 
@@ -120,19 +146,12 @@ export default class ItemNew extends Vue {
     ).toISOString()
   }
 
-  get isPastDate() {
-    const model = new Date(this.modelDatetime)
-    const now = new Date()
-    return +model < +now
+  get dateDatetime() {
+    return new Date(this.modelDatetime)
   }
 
-  get distanceString() {
-    if (!this.modelDatetime) {
-      return 'Anon'
-    }
-    const then = new Date(this.modelDatetime)
-    const now = new Date()
-    return formatDistanceStrict(then, now, { addSuffix: true })
+  get isPastDate() {
+    return +this.dateDatetime < +new Date()
   }
 
   // Validation

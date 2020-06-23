@@ -1,7 +1,7 @@
 // Controls ————————————————————————————————————————————————————————————
 
 $icon_arrow-down-dark: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><path opacity='.35' d='M63.36 8.47L33.47 38.36a2 2 0 01-2.95 0L.64 8.47A2.21 2.21 0 010 7a2.21 2.21 0 01.64-1.47l3.21-3.21a2.09 2.09 0 011.47-.64 2.21 2.21 0 011.47.64L32 27.52l25.2-25.2a2 2 0 012.95 0l3.21 3.21A2.21 2.21 0 0164 7a2.21 2.21 0 01-.64 1.47z'/></svg>");
-$icon_arrow-down-light: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><path opacity='.35' fill='#fff' d='M63.36 8.47L33.47 38.36a2 2 0 01-2.95 0L.64 8.47A2.21 2.21 0 010 7a2.21 2.21 0 01.64-1.47l3.21-3.21a2.09 2.09 0 011.47-.64 2.21 2.21 0 011.47.64L32 27.52l25.2-25.2a2 2 0 012.95 0l3.21 3.21A2.21 2.21 0 0164 7a2.21 2.21 0 01-.64 1.47z'/></svg>");
+$icon_arrow-down-light: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'><path opacity='.35' fill='white' d='M63.36 8.47L33.47 38.36a2 2 0 01-2.95 0L.64 8.47A2.21 2.21 0 010 7a2.21 2.21 0 01.64-1.47l3.21-3.21a2.09 2.09 0 011.47-.64 2.21 2.21 0 011.47.64L32 27.52l25.2-25.2a2 2 0 012.95 0l3.21 3.21A2.21 2.21 0 0164 7a2.21 2.21 0 01-.64 1.47z'/></svg>");
 
 :root {
   --controls-radius: 2px;
@@ -148,6 +148,10 @@ input[type='time'] {
 
   &:not([multiple]):not([size]) {
     background-image: $icon_arrow-down-dark;
+
+    @media (prefers-color-scheme: dark) {
+      background-image: $icon_arrow-down-light;
+    }
   }
 }
 

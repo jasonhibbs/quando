@@ -37,7 +37,7 @@
 
     --color-text: var(--color-contrast);
     --color-focus: var(--color-key-50);
-    --color-text-error: #{lighten($color-error, 10)};
+    --color-text-error: #{lighten($color-error, 6)};
 
     --button-bad-focus-color: var(--color-error-50);
   }
