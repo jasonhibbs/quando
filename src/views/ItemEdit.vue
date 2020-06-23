@@ -68,7 +68,6 @@ import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { lightFormat } from 'date-fns'
 import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
-import { TIMEZONES } from '@/timezones.ts'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
 import SelectTimezone from '@/components/SelectTimezone.vue'
@@ -87,7 +86,6 @@ export default class ItemNew extends Vue {
   modelDate: string = ''
   modelTime: string = ''
   timezoneSelected = ''
-  timezoneOptions = TIMEZONES
 
   // Lifecycle
 
