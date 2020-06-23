@@ -20,7 +20,7 @@
     margin-top: 0;
 
     & + .form-block {
-      margin-left: rem(var(--space-small));
+      margin-left: rem(var(--space-mid));
     }
   }
 }
@@ -47,7 +47,7 @@
 }
 
 .form-block-control {
-  display: flex;
+  // display: flex;
   flex: auto;
   min-width: 0;
 
@@ -56,5 +56,9 @@
   textarea {
     flex: auto;
     width: 100%;
+  }
+
+  & + .form-block-control {
+    margin-left: rem(var(--space-smaller));
   }
 }

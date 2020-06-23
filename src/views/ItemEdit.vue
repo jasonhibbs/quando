@@ -26,16 +26,18 @@
             v-model="modelLabel"
           ) Label
 
-          form-block-input#input-date(
-            type="date"
-            placeholder="YYYY-MM-DD"
-            min="0101-01-01"
-            max="9999-12-31"
-            required
-            v-model="modelDate"
-          ) Date
-
           .form-block._inline
+
+            form-block-input#input-date(
+              type="date"
+              placeholder="YYYY-MM-DD"
+              min="0101-01-01"
+              max="9999-12-31"
+              required
+              v-model="modelDate"
+            ) Date
+
+
 
             form-block-input#input-time(
               type="time"
@@ -43,22 +45,28 @@
               required
               v-model="modelTime"
             ) Time
+              template(#after-control)
+                .form-block-control.form-block-timezone
+                  select-timezone(
+                    :target="modelDatetime"
+                    v-model="timezoneSelected"
+                  )
 
-            form-block-select#select-timezone(
-              v-model="timezoneSelected"
-            )
-              template(#default) Timezone
-              template(#options)
-                optgroup(label="Local")
-                  option(value="") {{ user.timezone }}
-                optgroup(
-                  v-for="group in timezoneOptions"
-                  :label="group.label"
-                )
-                  option(
-                    v-for="zone in group.zones"
-                    :value="zone.value"
-                  ) {{ zone.label }}
+            //- form-block-select#select-timezone(
+            //-   v-model="timezoneSelected"
+            //- )
+            //-   template(#default) Timezone
+            //-   template(#options)
+            //-     optgroup(label="Local")
+            //-       option(value="") {{ user.timezone }}
+            //-     optgroup(
+            //-       v-for="group in timezoneOptions"
+            //-       :label="group.label"
+            //-     )
+            //-       option(
+            //-         v-for="zone in group.zones"
+            //-         :value="zone.value"
+            //-       ) {{ zone.label }}
 
           .form-block._submit
             .form-block-controls
@@ -89,11 +97,13 @@ import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 import { TIMEZONES } from '@/timezones.ts'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
+import SelectTimezone from '@/components/SelectTimezone.vue'
 
 @Component({
   components: {
     FormBlockInput,
     FormBlockSelect,
+    SelectTimezone,
   },
   computed: mapState(['user']),
 })

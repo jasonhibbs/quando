@@ -93,15 +93,27 @@ input[type='time'] {
   }
 
   &::-webkit-calendar-picker-indicator {
-    width: em(20);
-    height: em(20);
+    // width: em(20);
+    // height: em(20);
     padding: rem(8);
     margin: rem(-8);
     margin-inline-start: 0;
+    opacity: (2/5);
+    transition: opacity 0.15s;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
+  }
+
+  &::-webkit-date-and-time-value {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &::-webkit-datetime-edit {
@@ -139,6 +151,7 @@ input[type='time'] {
   }
 }
 
-select {
+select,
+.select {
   @extend %select-base;
 }

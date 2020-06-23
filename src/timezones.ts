@@ -419,7 +419,7 @@ export const TIMEZONES: {
     label: 'Brazil',
     zones: [
       { value: 'Brazil/Acre', label: 'Acre' },
-      { value: 'Brazil/DeNoronha', label: 'DeNoronha' },
+      // { value: 'Brazil/DeNoronha', label: 'DeNoronha' },
       { value: 'Brazil/East', label: 'East' },
       { value: 'Brazil/West', label: 'West' },
     ],
@@ -571,14 +571,14 @@ export const TIMEZONES: {
       { value: 'Indian/Reunion', label: 'Reunion' },
     ],
   },
-  {
-    label: 'Mexico',
-    zones: [
-      { value: 'Mexico/BajaNorte', label: 'BajaNorte' },
-      { value: 'Mexico/BajaSur', label: 'BajaSur' },
-      { value: 'Mexico/General', label: 'General' },
-    ],
-  },
+  // {
+  //   label: 'Mexico',
+  //   zones: [
+  //     { value: 'Mexico/BajaNorte', label: 'BajaNorte' },
+  //     { value: 'Mexico/BajaSur', label: 'BajaSur' },
+  //     { value: 'Mexico/General', label: 'General' },
+  //   ],
+  // },
   {
     label: 'Pacific',
     zones: [
@@ -627,22 +627,22 @@ export const TIMEZONES: {
       { value: 'Pacific/Yap', label: 'Yap' },
     ],
   },
-  {
-    label: 'US',
-    zones: [
-      { value: 'US/Alaska', label: 'Alaska' },
-      { value: 'US/Aleutian', label: 'Aleutian' },
-      { value: 'US/Arizona', label: 'Arizona' },
-      { value: 'US/Central', label: 'Central' },
-      { value: 'US/East-Indiana', label: 'East Indiana' },
-      { value: 'US/Eastern', label: 'Eastern' },
-      { value: 'US/Hawaii', label: 'Hawaii' },
-      { value: 'US/Indiana-Starke', label: 'Indiana-Starke' },
-      { value: 'US/Michigan', label: 'Michigan' },
-      { value: 'US/Mountain', label: 'Mountain' },
-      { value: 'US/Pacific', label: 'Pacific' },
-      { value: 'US/Pacific-New', label: 'Pacific New' },
-      { value: 'US/Samoa', label: 'Samoa' },
-    ],
-  },
+  // {
+  //   label: 'US',
+  //   zones: [
+  //     { value: 'US/Alaska', label: 'Alaska' },
+  //     { value: 'US/Aleutian', label: 'Aleutian' },
+  //     { value: 'US/Arizona', label: 'Arizona' },
+  //     { value: 'US/Central', label: 'Central' },
+  //     { value: 'US/East-Indiana', label: 'East Indiana' },
+  //     { value: 'US/Eastern', label: 'Eastern' },
+  //     { value: 'US/Hawaii', label: 'Hawaii' },
+  //     { value: 'US/Indiana-Starke', label: 'Indiana-Starke' },
+  //     { value: 'US/Michigan', label: 'Michigan' },
+  //     { value: 'US/Mountain', label: 'Mountain' },
+  //     { value: 'US/Pacific', label: 'Pacific' },
+  //     { value: 'US/Pacific-New', label: 'Pacific New' },
+  //     { value: 'US/Samoa', label: 'Samoa' },
+  //   ],
+  // },
 ]
