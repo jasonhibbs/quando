@@ -38,12 +38,19 @@
                     v-model="model.timezone"
                   )
 
-          form-block-input#input-label(
-            type="text"
-            required
-            :placeholder="placeholder"
-            v-model="model.label"
-          ) Label
+          .form-block._inline
+
+            form-block-input#input-label(
+              type="text"
+              required
+              :placeholder="placeholder"
+              v-model="model.label"
+            ) Label
+
+            form-block-select#input-display(
+              :options="displayOptions"
+              v-model="model.display"
+            ) Units
 
           .form-block
             h2 Preview
@@ -52,10 +59,7 @@
                 .times-item-label {{ model.label || this.placeholder }}
                 .times-item-time {{ distanceString }}
 
-          form-block-select#input-display(
-            :options="displayOptions"
-            v-model="model.display"
-          ) Display
+
 
           .form-block._submit
             .form-block-controls
@@ -99,9 +103,10 @@ export default class ItemNew extends Vue {
 
   displayOptions = [
     { label: 'Auto', value: 'auto' },
-    { label: 'Seconds', value: 'seconds' },
-    { label: 'Minutes', value: 'minutes' },
-    { label: 'Days', value: 'days' },
+    { label: 'Seconds', value: 'second' },
+    { label: 'Minutes', value: 'minute' },
+    { label: 'Days', value: 'day' },
+    { label: 'Month', value: 'month' },
   ]
 
   // Setup
@@ -116,6 +121,7 @@ export default class ItemNew extends Vue {
       label: this.model.label,
       datetime: this.modelDatetime,
       timezone: this.modelTimezone,
+      display: this.model.display || 'auto',
     }
   }
 
@@ -131,19 +137,30 @@ export default class ItemNew extends Vue {
     ).toISOString()
   }
 
+  get dateDatetime() {
+    return new Date(this.modelDatetime)
+  }
+
   get isPastDate() {
-    const model = new Date(this.modelDatetime)
-    const now = new Date()
-    return +model < +now
+    return +this.dateDatetime < +new Date()
   }
 
   get distanceString() {
     if (!this.modelDatetime) {
       return 'Anon'
     }
-    const then = new Date(this.modelDatetime)
-    const now = new Date()
-    return formatDistanceStrict(then, now, { addSuffix: true })
+    const options: any = {
+      addSuffix: true,
+    }
+    if (this.model.display !== 'auto') {
+      options.unit = this.model.display
+    }
+    const string = formatDistanceStrict(this.dateDatetime, new Date(), options)
+    return this.parseThousands(string)
+  }
+
+  parseThousands(string: string) {
+    return string.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 
   // Validation
