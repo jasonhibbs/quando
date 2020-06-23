@@ -52,6 +52,11 @@
                 .times-item-label {{ model.label || this.placeholder }}
                 .times-item-time {{ distanceString }}
 
+          form-block-select#input-display(
+            :options="displayOptions"
+            v-model="model.display"
+          ) Display
+
           .form-block._submit
             .form-block-controls
               button(
@@ -89,9 +94,15 @@ export default class ItemNew extends Vue {
     date: new Date().toISOString().slice(0, 10),
     time: '00:00',
     timezone: '',
+    display: 'auto',
   }
 
-  timezoneSelected = ''
+  displayOptions = [
+    { label: 'Auto', value: 'auto' },
+    { label: 'Seconds', value: 'seconds' },
+    { label: 'Minutes', value: 'minutes' },
+    { label: 'Days', value: 'days' },
+  ]
 
   // Setup
 
