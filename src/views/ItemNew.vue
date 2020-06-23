@@ -52,14 +52,11 @@
               v-model="model.display"
             ) Units
 
-          .form-block
+          .form-block._section
             h2 Preview
-            .times-item
-              .times-item-inner
-                .times-item-label {{ model.label || this.placeholder }}
-                .times-item-time {{ distanceString }}
-
-
+            list-item-time(
+              :time="preview"
+            )
 
           .form-block._submit
             .form-block-controls
@@ -80,12 +77,14 @@ import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
 import SelectTimezone from '@/components/SelectTimezone.vue'
+import ListItemTime from '@/components/ListItemTime.vue'
 
 @Component({
   components: {
     FormBlockInput,
     FormBlockSelect,
     SelectTimezone,
+    ListItemTime,
   },
   computed: mapState(['user']),
 })
@@ -125,6 +124,16 @@ export default class ItemNew extends Vue {
     }
   }
 
+  get preview() {
+    const { datetime, timezone, display } = this.item
+    return {
+      label: this.model.label || this.placeholder,
+      datetime,
+      timezone,
+      display,
+    }
+  }
+
   get modelTimezone() {
     return this.model.timezone || this.user.timezone
   }
@@ -143,24 +152,6 @@ export default class ItemNew extends Vue {
 
   get isPastDate() {
     return +this.dateDatetime < +new Date()
-  }
-
-  get distanceString() {
-    if (!this.modelDatetime) {
-      return 'Anon'
-    }
-    const options: any = {
-      addSuffix: true,
-    }
-    if (this.model.display !== 'auto') {
-      options.unit = this.model.display
-    }
-    const string = formatDistanceStrict(this.dateDatetime, new Date(), options)
-    return this.parseThousands(string)
-  }
-
-  parseThousands(string: string) {
-    return string.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 
   // Validation

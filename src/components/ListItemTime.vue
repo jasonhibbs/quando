@@ -1,7 +1,8 @@
 <template lang="pug">
 
-  router-link.times-item(
-    :to="{ name: 'Single', params: { id: id }}"
+  component.times-item(
+    :is="tag"
+    :to="href"
   )
     .times-item-inner
       .times-item-label {{ timeLabel }}
@@ -15,7 +16,7 @@ import { formatDistanceStrict } from 'date-fns'
 @Component
 export default class ListItemTime extends Vue {
   @Prop() time!: {
-    id: string
+    id?: string
     label: string
     datetime: string
     display?: string
@@ -23,6 +24,14 @@ export default class ListItemTime extends Vue {
 
   get id() {
     return this.time.id
+  }
+
+  get href() {
+    return !this.id ? null : { name: 'Single', params: { id: this.id } }
+  }
+
+  get tag() {
+    return this.href ? 'router-link' : 'div'
   }
 
   get timeLabel() {
