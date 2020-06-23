@@ -52,22 +52,6 @@
                     v-model="timezoneSelected"
                   )
 
-            //- form-block-select#select-timezone(
-            //-   v-model="timezoneSelected"
-            //- )
-            //-   template(#default) Timezone
-            //-   template(#options)
-            //-     optgroup(label="Local")
-            //-       option(value="") {{ user.timezone }}
-            //-     optgroup(
-            //-       v-for="group in timezoneOptions"
-            //-       :label="group.label"
-            //-     )
-            //-       option(
-            //-         v-for="zone in group.zones"
-            //-         :value="zone.value"
-            //-       ) {{ zone.label }}
-
           .form-block._submit
             .form-block-controls
               router-link.button(
