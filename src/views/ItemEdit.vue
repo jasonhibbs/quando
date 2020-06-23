@@ -19,13 +19,6 @@
       .layout
         form.form-blocks(@submit.prevent='onSubmit')
 
-          form-block-input#input-label(
-            type="text"
-            required
-            :placeholder="placeholder"
-            v-model="modelLabel"
-          ) Label
-
           .form-block._inline
 
             form-block-input#input-date(
@@ -49,6 +42,22 @@
                     :target="modelDatetime"
                     v-model="timezoneSelected"
                   )
+
+          .form-block._inline
+
+            form-block-input#input-label(
+              type="text"
+              required
+              :placeholder="placeholder"
+              v-model="modelLabel"
+            ) Label
+
+            form-block-select#input-display(
+              :options="displayOptions"
+              v-model="modelDisplay"
+            ) Units
+
+
 
           .form-block._submit
             .form-block-controls
@@ -85,7 +94,16 @@ export default class ItemNew extends Vue {
   modelLabel: string = ''
   modelDate: string = ''
   modelTime: string = ''
+  modelDisplay: string = 'auto'
   timezoneSelected = ''
+
+  displayOptions = [
+    { label: 'Auto', value: 'auto' },
+    { label: 'Seconds', value: 'second' },
+    { label: 'Minutes', value: 'minute' },
+    { label: 'Days', value: 'day' },
+    { label: 'Month', value: 'month' },
+  ]
 
   // Lifecycle
 
@@ -102,6 +120,7 @@ export default class ItemNew extends Vue {
   setupModel() {
     this.modelLabel = this.item.label
     this.timezoneSelected = this.item.timezone || ''
+    this.modelDisplay = this.item.display || 'auto'
     const zonedTime = utcToZonedTime(this.item.datetime, this.modelTimezone)
     this.modelDate = lightFormat(zonedTime, 'yyyy-MM-dd')
     this.modelTime = lightFormat(zonedTime, 'HH:mm:ss')
@@ -137,6 +156,7 @@ export default class ItemNew extends Vue {
       label: this.modelLabel,
       datetime: this.modelDatetime,
       timezone: this.modelTimezone,
+      display: this.modelDisplay,
     }
   }
 
@@ -158,7 +178,8 @@ export default class ItemNew extends Vue {
     const labelChanged = this.item.label !== this.modelLabel
     const datetimeChanged = this.item.datetime !== this.modelDatetime
     const timezoneChanged = this.item.timezone !== this.modelTimezone
-    return labelChanged || datetimeChanged || timezoneChanged
+    const displayChanged = this.item.display !== this.modelDisplay
+    return labelChanged || datetimeChanged || timezoneChanged || displayChanged
   }
 
   // Events
