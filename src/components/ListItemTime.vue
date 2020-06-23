@@ -71,6 +71,9 @@ export default class ListItemTime extends Vue {
   }
 
   get timeString() {
+    if (!this.time.datetime) {
+      return 'Anon'
+    }
     const t = this.tick // force update
     const then = new Date(this.time.datetime)
     const now = new Date()

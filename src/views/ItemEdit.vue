@@ -57,7 +57,11 @@
               v-model="modelDisplay"
             ) Units
 
-
+          .form-block
+            h2 Preview
+            list-item-time(
+              :time="preview"
+            )
 
           .form-block._submit
             .form-block-controls
@@ -80,12 +84,14 @@ import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
 import SelectTimezone from '@/components/SelectTimezone.vue'
+import ListItemTime from '@/components/ListItemTime.vue'
 
 @Component({
   components: {
     FormBlockInput,
     FormBlockSelect,
     SelectTimezone,
+    ListItemTime,
   },
   computed: mapState(['user']),
 })
@@ -127,7 +133,7 @@ export default class ItemNew extends Vue {
   }
 
   get placeholder() {
-    return 'It happened'
+    return this.isPastDate ? 'It happened' : 'It happens'
   }
 
   get itemId() {
@@ -136,6 +142,15 @@ export default class ItemNew extends Vue {
 
   get item() {
     return this.$store.getters.getItemById(this.itemId)
+  }
+
+  get preview() {
+    return {
+      label: this.modelLabel || this.placeholder,
+      datetime: this.modelDatetime,
+      timezone: this.modelTimezone,
+      display: this.modelDisplay || 'auto',
+    }
   }
 
   get modelTimezone() {
@@ -158,6 +173,14 @@ export default class ItemNew extends Vue {
       timezone: this.modelTimezone,
       display: this.modelDisplay,
     }
+  }
+
+  get dateDatetime() {
+    return new Date(this.modelDatetime)
+  }
+
+  get isPastDate() {
+    return +this.dateDatetime < +new Date()
   }
 
   // Validation
