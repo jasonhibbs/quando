@@ -52,6 +52,7 @@
 html {
   background-color: var(--color-root);
   color: var(--color-text);
+  word-break: initial;
 }
 
 :focus {

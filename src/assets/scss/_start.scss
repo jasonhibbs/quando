@@ -53,16 +53,16 @@ input {
 }
 
 .times-item-label {
-  font-size: min(max(1rem, 5vw), em(32));
+  font-size: clamp(1rem, 5vw, em(32));
 }
 .times-item-time {
-  font-size: min(max(1.5rem, 8vw), em(48));
+  font-size: clamp(1.5rem, 8vw, em(48));
 }
 
 .bar {
   min-height: rem(44);
   background-color: var(--color-root-backdrop);
-  backdrop-filter: blur(30px);
+  backdrop-filter: saturate(2) blur(30px);
   box-shadow: 0 1px 0 var(--contrast-lighter);
   position: sticky;
   top: 0;
@@ -83,7 +83,8 @@ input {
 
 .bar-button {
   flex: auto;
-  line-height: (20/16);
+  font-size: em(17);
+  line-height: (20/17);
   border: none;
   padding: rem(12) rem(var(--screen-padding-x));
   max-width: calc(50% + ((1rem / 16) * var(--screen-padding-x)));
@@ -122,7 +123,7 @@ button.bar-button {
 }
 
 .counter-count {
-  font-size: min(max(1rem, 12vw), em(72));
+  font-size: clamp(1rem, 11vw, em(72));
   line-height: 1;
   padding-bottom: rem(var(--space-smaller));
   @extend .tabular;
@@ -136,14 +137,14 @@ button.bar-button {
 
 .date-item {
   time {
-    font-size: min(max(1rem, 3vw), em(24));
+    font-size: clamp(1rem, 3vw, em(24));
     margin: 0;
   }
 }
 
 .sentence-item {
   p {
-    font-size: min(max(rem(18), 6vw), em(36));
+    font-size: clamp(rem(18), 6vw, em(36));
     margin: 0;
   }
 }

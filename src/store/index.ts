@@ -26,8 +26,8 @@ export default new Vuex.Store({
     items: [
       {
         id: '00000000-0000-0000-0000-000000000000',
-        label: 'For example',
-        datetime: '1989-03-25T00:18:00Z',
+        label: 'WHO declares COVID-19 a pandemic',
+        datetime: '2020-03-11T22:00:00Z',
         timezone: 'Europe/London',
       },
     ],

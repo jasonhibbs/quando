@@ -42,6 +42,8 @@
   cursor: pointer;
   display: inline-block;
   line-height: (20/16);
+  font-family: inherit;
+  font-size: 100%;
   padding: rem(var(--padding-y)) rem(var(--padding-x));
   transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
 

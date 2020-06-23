@@ -15,13 +15,6 @@ $icon_arrow-down-light: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http:/
   --input-focus-color: var(--color-focus);
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
 // Placeholders
 
 %placeholder {
@@ -62,6 +55,8 @@ textarea {
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   line-height: (20/16);
+  font-family: inherit;
+  font-size: 100%;
   padding: rem(var(--padding-y)) rem(var(--padding-x));
   transition: border-color 0.1s, background-color 0.1s, box-shadow 0.1s;
 
@@ -128,7 +123,6 @@ input[type='time'] {
   @extend %input-base;
 
   appearance: none;
-
   background-position: right rem(var(--padding-x)) center;
   background-repeat: no-repeat;
   background-size: rem(9.5) auto;
