@@ -37,8 +37,6 @@
               v-model="modelDate"
             ) Date
 
-
-
             form-block-input#input-time(
               type="time"
               placeholder="HH:MM"
@@ -63,14 +61,6 @@
                 :disabled="!isModelValid || !isModelDifferent"
               )
                 .button-label Save Changes
-
-        //- .zone-danger
-          h2 Danger Zone
-          button._bad(
-            type="button"
-            @click="onClickButtonDelete"
-          )
-            .button-label ✗ Delete Time
 
 </template>
 <script lang="ts">
