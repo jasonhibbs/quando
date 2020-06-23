@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  .screen
+  .screen.item-new
 
     .bar
       .bar-block
@@ -13,14 +13,6 @@
     main
       .layout
         form.form-blocks(@submit.prevent='onSubmit')
-
-          form-block-input#input-label(
-            type="text"
-            required
-            :placeholder="placeholder"
-            v-model="model.label"
-          ) Label
-
 
           .form-block._inline
 
@@ -46,27 +38,21 @@
                     v-model="model.timezone"
                   )
 
-            //- form-block-select#select-timezone(
-            //-   v-model="model.timezone"
-            //- )
-            //-   template(#default) Timezone
-            //-   template(#options)
-            //-     optgroup(label="Local")
-            //-       option(value="") {{ user.timezone }}
-            //-     optgroup(
-            //-       v-for="group in timezoneOptions"
-            //-       :label="group.label"
-            //-     )
-            //-       option(
-            //-         v-for="zone in group.zones"
-            //-         :value="zone.value"
-            //-       ) {{ zone.label }}
+          form-block-input#input-label(
+            type="text"
+            required
+            :placeholder="placeholder"
+            v-model="model.label"
+          ) Label
+
+          .form-block
+            h2 Preview
+            .times-item
+              .times-item-inner
+                .times-item-label {{ model.label || this.placeholder }}
+                .times-item-time {{ distanceString }}
 
           .form-block._submit
-            //- .form-block-hint
-              p ID is {{modelId}}
-              p Label is {{ model.label }}
-              p Date is {{ modelDatetime }}
             .form-block-controls
               button(
                 type="submit"
@@ -80,7 +66,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { v4 as uuidv4 } from 'uuid'
 import { mapState } from 'vuex'
-import { lightFormat } from 'date-fns'
+import { lightFormat, formatDistanceStrict } from 'date-fns'
 import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 import FormBlockInput from '@/components/FormBlockInput.vue'
 import FormBlockSelect from '@/components/FormBlockSelect.vue'
@@ -110,7 +96,7 @@ export default class ItemNew extends Vue {
   // Setup
 
   get placeholder() {
-    return 'It happened'
+    return this.isPastDate ? 'It happened' : 'It happens'
   }
 
   get item() {
@@ -132,6 +118,21 @@ export default class ItemNew extends Vue {
       `${this.model.date} ${this.model.time}`,
       this.modelTimezone
     ).toISOString()
+  }
+
+  get isPastDate() {
+    const model = new Date(this.modelDatetime)
+    const now = new Date()
+    return +model < +now
+  }
+
+  get distanceString() {
+    if (!this.modelDatetime) {
+      return 'Anon'
+    }
+    const then = new Date(this.modelDatetime)
+    const now = new Date()
+    return formatDistanceStrict(then, now, { addSuffix: true })
   }
 
   // Validation

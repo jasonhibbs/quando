@@ -95,8 +95,8 @@ input[type='time'] {
   &::-webkit-calendar-picker-indicator {
     // width: em(20);
     // height: em(20);
-    padding: rem(8);
-    margin: rem(-8);
+    padding: rem(10);
+    margin: rem(-10);
     margin-inline-start: 0;
     opacity: (2/5);
     transition: opacity 0.15s;

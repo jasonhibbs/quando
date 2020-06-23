@@ -154,3 +154,15 @@ button.bar-button {
 .form-block-timezone {
   flex: none;
 }
+
+.screen.item-new {
+  & .times-item {
+    background-color: var(--color-root);
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px var(--shade-lightest), 0 1px 1rem var(--shade-lighter);
+  }
+
+  & .times-item-inner {
+    @include padding-x(rem(20));
+  }
+}
