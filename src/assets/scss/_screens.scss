@@ -1,6 +1,7 @@
 // Screens —————————————————————————————————————————————————————————————
 
-$slide-duration: 0.2s;
+$slide-duration: (28s/60);
+$slide-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
 
 .screen {
   background-color: var(--color-root);
@@ -34,7 +35,7 @@ $slide-duration: 0.2s;
   right: 0;
   bottom: 0;
   left: 0;
-  transition: transform $slide-duration ease-out;
+  transition: transform $slide-duration $slide-ease;
 
   &:after {
     content: '';
@@ -57,7 +58,7 @@ $slide-duration: 0.2s;
 // Background
 .slide-left-leave-active,
 .slide-right-enter-active {
-  transition: transform $slide-duration ease-out;
+  transition: transform $slide-duration $slide-ease;
 }
 
 .slide-left-leave-to,
