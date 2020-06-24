@@ -61,8 +61,8 @@ export default class App extends Vue {
   }
 
   @Watch('$route') onRouteChange(to: any, from: any) {
-    const toDepth = to.path.split('/').length
-    const fromDepth = from.path.split('/').length
+    const toDepth = to.path.split('/').filter(Boolean).length
+    const fromDepth = from.path.split('/').filter(Boolean).length
     this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
   }
 }

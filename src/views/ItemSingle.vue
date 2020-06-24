@@ -2,7 +2,7 @@
 
   .screen
 
-    .bar
+    header.bar
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'List' }"

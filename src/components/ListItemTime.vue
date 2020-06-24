@@ -80,7 +80,7 @@ export default class ListItemTime extends Vue {
     const options: any = {
       addSuffix: true,
       unit: this.displayUnits,
-      roundingMethod: 'floor',
+      roundingMethod: this.displayUnits ? 'floor' : 'round',
     }
     const string = formatDistanceStrict(then, now, options)
     return this.parseThousands(string)

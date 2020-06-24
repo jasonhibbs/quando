@@ -2,7 +2,7 @@
 
   .screen.item-new
 
-    .bar
+    header.bar
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'List' }"
@@ -52,7 +52,7 @@
               v-model="model.display"
             ) Units
 
-          .form-block._section
+          .form-block
             h2 Preview
             list-item-time(
               :time="preview"

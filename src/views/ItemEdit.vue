@@ -2,7 +2,7 @@
 
   .screen(v-if="item")
 
-    .bar
+    header.bar
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'Single', params: { id: this.itemId } }"

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-import ItemNew from '../views/ItemNew.vue'
+import ItemList from '../views/ItemList.vue'
 import ItemSingle from '../views/ItemSingle.vue'
+import ItemNew from '../views/ItemNew.vue'
 import ItemEdit from '../views/ItemEdit.vue'
 
 Vue.use(VueRouter)
@@ -10,12 +11,18 @@ Vue.use(VueRouter)
 const routes: RouteConfig[] = [
   {
     path: '*',
-    redirect: '/',
+    redirect: '/times/',
   },
   {
     path: '/',
-    name: 'List',
+    name: 'Home',
     component: Home,
+    redirect: '/times/',
+  },
+  {
+    path: '/times/',
+    name: 'List',
+    component: ItemList,
   },
   {
     path: '/times/new',
