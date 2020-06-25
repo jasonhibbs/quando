@@ -1,6 +1,7 @@
 <template lang="pug">
 
   component.times-item(
+    :class="classes"
     :is="tag"
     :to="href"
   )
@@ -24,6 +25,10 @@ export default class ListItemTime extends Vue {
 
   tick: number = 0
   tickInterval: any = null
+
+  get classes() {
+    return this.displayUnits ? `_unit-${this.displayUnits}` : ''
+  }
 
   mounted() {
     if (this.displayUnits === 'second') {
@@ -140,5 +145,9 @@ div > .times-item-inner {
 }
 .times-item-time {
   font-size: clamp(1.5rem, 8vw, em(48));
+}
+
+._unit-second .times-item-time {
+  font-variant: tabular-nums;
 }
 </style>
