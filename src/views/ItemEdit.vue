@@ -52,7 +52,7 @@
               v-model="modelLabel"
             ) Label
 
-            form-block-select#input-display(
+            form-block-select#input-display._min(
               :options="displayOptions"
               v-model="modelDisplay"
             ) Units

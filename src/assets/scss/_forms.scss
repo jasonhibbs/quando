@@ -24,6 +24,10 @@
       margin-left: rem(var(--space-mid));
     }
   }
+
+  > .form-block._min {
+    flex: none;
+  }
 }
 
 .form-block-label {
