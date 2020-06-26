@@ -39,6 +39,9 @@
     --color-focus: var(--color-key-50);
     --color-text-error: #{lighten($color-error, 6)};
 
+    --button-color: var(--color-key-lighter);
+    --button-background-color: var(--color-key-30);
+    --button-hover-background-color: var(--color-key-40);
     --button-bad-focus-color: var(--color-error-50);
   }
 

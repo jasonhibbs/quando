@@ -45,6 +45,7 @@ input {
 
 .bar-button {
   flex: auto;
+  flex-basis: 0;
   font-size: em(17);
   line-height: (20/17);
   border: none;

@@ -19,6 +19,11 @@
   @return #{'calc((1em /'} $context #{') * '} $value #{')'};
 }
 
+@mixin font-size($size: 16, $height: 24, $context: 16) {
+  font-size: em($size, $context);
+  line-height: ($height / $size);
+}
+
 @mixin padding-x($right: 0, $left: $right) {
   padding-left: $left;
   padding-right: $right;
@@ -79,4 +84,22 @@
     outline: none;
     box-shadow: inset 0 0 0 $width $color;
   }
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+html.is-app ._isnt-app,
+html.is-ios ._isnt-ios,
+html:not(.is-app) ._is-app,
+html:not(.is-ios) ._is-ios {
+  display: none;
 }

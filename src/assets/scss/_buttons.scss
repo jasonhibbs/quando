@@ -2,7 +2,7 @@
 
 :root {
   --button-padding-x: 18;
-  --button-padding-y: 10;
+  --button-padding-y: 9;
 
   --button-color: var(--color-key);
   --button-background-color: var(--color-key-10);
@@ -74,10 +74,10 @@
 }
 
 %button._good {
-  --color: var(--button-bad-color);
-  --background-color: var(--button-bad-background-color);
-  --hover-background-color: var(--button-bad-hover-background-color);
-  --focus-color: var(--button-bad-focus-color);
+  --color: var(--button-good-color);
+  --background-color: var(--button-good-background-color);
+  --hover-background-color: var(--button-good-hover-background-color);
+  --focus-color: var(--button-good-focus-color);
 }
 
 %button._bad {
