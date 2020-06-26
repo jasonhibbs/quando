@@ -6,6 +6,7 @@ main {
 }
 
 input {
+  @extend .tabular;
   scroll-margin-top: em((92 + 28 + 8)); // bar + label + extra
 }
 
@@ -101,7 +102,7 @@ button.bar-button {
   font-size: clamp(1rem, 11vw, em(72));
   line-height: 1;
   padding-bottom: rem(var(--space-smaller));
-  @extend .tabular;
+  text-indent: (1em/-20);
 }
 
 // .counter-unit {
@@ -118,6 +119,8 @@ button.bar-button {
 }
 
 .sentence-item {
+  @extend .tabular;
+
   p {
     font-size: clamp(rem(18), 6vw, em(36));
     margin: 0;

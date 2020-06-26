@@ -21,7 +21,7 @@
     margin-top: 0;
 
     & + .form-block {
-      margin-left: rem(var(--space-mid));
+      margin-left: rem(12);
     }
   }
 
@@ -64,6 +64,6 @@
   }
 
   & + .form-block-control {
-    margin-left: rem(var(--space-smaller));
+    margin-left: rem(var(--space-smallest));
   }
 }

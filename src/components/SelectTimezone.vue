@@ -68,7 +68,7 @@ export default class SelectTimezone extends Vue {
   border: 1px solid transparent;
   border-radius: var(--controls-radius);
   font-size: em(14);
-  line-height: (20/14);
+  line-height: (24/14);
   padding: rem(var(--input-padding-y)) rem(var(--input-padding-y));
 }
 
