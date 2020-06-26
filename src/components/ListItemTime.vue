@@ -145,6 +145,7 @@ div > .times-item-inner {
 }
 .times-item-time {
   font-size: clamp(1.5rem, 8vw, em(48));
+  text-indent: (1em/-20);
 }
 
 ._unit-second .times-item-time {

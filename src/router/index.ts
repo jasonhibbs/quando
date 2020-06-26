@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import More from '../views/More.vue'
 import ItemList from '../views/ItemList.vue'
 import ItemSingle from '../views/ItemSingle.vue'
 import ItemNew from '../views/ItemNew.vue'
@@ -18,6 +19,11 @@ const routes: RouteConfig[] = [
     name: 'Home',
     component: Home,
     redirect: '/times/',
+  },
+  {
+    path: '/more/',
+    name: 'More',
+    component: More,
   },
   {
     path: '/times/',

@@ -1,14 +1,19 @@
 <template lang="pug">
 
-  .screen
+  .screen.screen-list
 
     header.bar
       .bar-block
+        router-link.bar-button._start(
+          :to="{ name: 'More' }"
+        ) More
+        logo
         router-link.bar-button._end(
           :to="{ name: 'New' }"
+          title="Add Time"
         ) Add
 
-      .bar-block
+      //- .bar-block
         h1 quando
 
     main
@@ -31,10 +36,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { formatDistanceStrict } from 'date-fns'
+import Logo from '@/components/Logo.vue'
 import ListItemTime from '@/components/ListItemTime.vue'
 
 @Component({
-  components: { ListItemTime },
+  components: { Logo, ListItemTime },
   filters: {
     fromNow: (date: string) => {
       return formatDistanceStrict(new Date(date), new Date(), {
@@ -60,4 +66,12 @@ export default class ItemList extends Vue {
   }
 }
 </script>
-
+<style lang="scss">
+.screen-list {
+  .logo {
+    font-size: (30em/16);
+    padding: (7rem/16);
+    flex: none;
+  }
+}
+</style>
