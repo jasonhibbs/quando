@@ -1,7 +1,10 @@
 <template lang="pug">
 
   .logo(:class="classes")
-    svg.icon(viewBox="0 0 4 4")
+    svg.icon(
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 4 4"
+    )
       defs
         linearGradient#dial(x1="0" y1="0" x2="0" y2="1")
           stop(offset="0%" stop-color="var(--dial-top)")
@@ -11,9 +14,9 @@
           stop(offset="100%" stop-color="var(--gnomon-right)")
         clipPath#clip
           circle(cx="2" cy="2" r="2")
-      circle#dial(cx="2" cy="2" r="2" fill="var(--dial)")
-      path#shadow(d="M 2 2 V 4 H 6 Z" fill="var(--shadow)" clip-path="url(#clip)")
-      path#gnomon(d="M 2 2 V 4 H 4 Z" fill="var(--gnomon)")
+      circle#dial(cx="2" cy="2" r="2" fill="url(#dial)")
+      path#shadow(d="M 2 2 V 4 H 6 Z" fill="var(--shadow-alpha)" clip-path="url(#clip)")
+      path#gnomon(d="M 2 2 V 4 H 4 Z" fill="url(#gnomon)")
 
     .type(v-if="type") quando
 
@@ -122,20 +125,16 @@ export default class Logo extends Vue {
 }
 
 .icon {
+  display: block;
   flex: none;
   width: var(--size);
 
   #dial {
-    fill: url(#dial);
     transition: opacity (2s/3) ease-out;
   }
 
-  #gnomon {
-    fill: url(#gnomon);
-  }
-
   #shadow {
-    fill: var(--shadow-alpha);
+    clip-path: url(#clip);
     transition: d (2s/3) ease-out;
   }
 }
