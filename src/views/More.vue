@@ -32,7 +32,16 @@
                   v-model="importString"
                 )
               .form-block-control._min
-                button._key(type="submit") Import
+                button._key(
+                  type="submit"
+                  :disabled="!importableItems.length"
+                ) Import
+
+          message(
+            v-if="importString && importedItems === null"
+          )
+            p(v-if="importableItems.length") Found {{ importableItems.length }} new {{ importableItems.length === 1 ? 'time' : 'times' }}
+            p(v-if="!importableItems.length") No new times found
 
           message(
             v-if="importedItems !== null"
@@ -131,6 +140,18 @@ export default class More extends Vue {
     }
   }
 
+  get importableItems() {
+    if (this.importItems.length) {
+      return this.importItems.filter((x: any) => {
+        const isDupe = this.existingIds.includes(x.id)
+        const isTime = x.id && x.label && x.datetime && x.timezone
+        return !isDupe && isTime
+      })
+    } else {
+      return []
+    }
+  }
+
   get importFeedback() {
     switch (this.importedItems) {
       case -1:
@@ -146,16 +167,9 @@ export default class More extends Vue {
 
   onSubmitImport() {
     this.resetMessages()
-    if (this.importItems.length) {
-      const newItems = this.importItems.filter((x: any) => {
-        const isDupe = this.existingIds.includes(x.id)
-        const isTime = x.id && x.label && x.datetime && x.timezone
-        return !isDupe && isTime
-      })
-
-      this.importedItems = newItems.length
-
-      for (let item of newItems) {
+    if (this.importableItems.length) {
+      this.importedItems = this.importableItems.length
+      for (let item of this.importableItems) {
         this.$store.commit('addItem', item)
       }
     } else {
