@@ -3,6 +3,8 @@
   .screen.screen-list
 
     header.bar
+      h1.visuallyhidden quando
+
       .bar-block
         router-link.bar-button._start(
           :to="{ name: 'More' }"
@@ -12,9 +14,6 @@
           :to="{ name: 'New' }"
           title="Add Time"
         ) Add
-
-      //- .bar-block
-        h1 quando
 
     main
 
@@ -28,7 +27,11 @@
 
         template(v-else)
           .list-copy
-            p No times found
+            h2 No times, yet.
+            p Get started with #[button.link(@click="onClickDemo") some examples], or
+            p
+              router-link.button._key(:to="{ name: 'New' }") Add your own time
+
 
 </template>
 
@@ -63,6 +66,10 @@ export default class ItemList extends Vue {
 
   get times() {
     return this.items.sort(this.sortTimes)
+  }
+
+  onClickDemo() {
+    this.$store.commit('pushDemoItems')
   }
 }
 </script>
