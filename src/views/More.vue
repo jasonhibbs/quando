@@ -188,6 +188,10 @@ export default class More extends Vue {
 @import '../assets/scss/util';
 
 .screen-more {
+  & .bar h1 {
+    margin: 0 0 rem(7);
+  }
+
   & main {
     padding-bottom: rem(80);
   }

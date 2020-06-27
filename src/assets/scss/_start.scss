@@ -24,7 +24,7 @@ input {
 .bar {
   min-height: rem(44);
   background-color: var(--color-root-backdrop);
-  backdrop-filter: saturate(2) blur(30px);
+  backdrop-filter: blur(24px);
   box-shadow: 0 1px 0 var(--contrast-lighter);
   position: sticky;
   top: 0;

@@ -32,7 +32,7 @@
               v-model="model.time"
             ) Time
               template(#after-control)
-                .form-block-control.form-block-timezone
+                .form-block-control._min
                   select-timezone(
                     :target="modelDatetime"
                     v-model="model.timezone"

@@ -15,7 +15,7 @@
     --color-black: #{$color-black};
 
     --color-root: var(--color-black);
-    --color-root-backdrop: #{$shade-darker};
+    --color-root-backdrop: #{fade-out(black, 0.4)};
 
     --color-contrast: var(--color-white);
 
@@ -50,9 +50,11 @@
   }
 
   a {
+    color: var(--color-key-lighter);
+
     &:focus,
     &:hover {
-      color: var(--color-key-lighter);
+      color: mix($color-white, $color-key, 40);
     }
   }
 }
