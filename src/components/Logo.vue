@@ -15,7 +15,7 @@
         clipPath#clip
           circle(cx="2" cy="2" r="2")
       circle#dial(cx="2" cy="2" r="2" fill="url(#dial)")
-      path#shadow(d="M 2 2 V 4 H 6 Z" fill="var(--shadow-alpha)" clip-path="url(#clip)")
+      path#shadow(d="M 2 2 V 4 H 4 V 3 Z" fill="var(--shadow-alpha)" clip-path="url(#clip)")
       path#gnomon(d="M 2 2 V 4 H 4 Z" fill="url(#gnomon)")
 
     .type(v-if="type") quando
@@ -81,7 +81,7 @@ export default class Logo extends Vue {
   &:focus,
   &:hover {
     #shadow {
-      d: path('M 2 2 V 4 H 9 Z');
+      d: path('M 2 2 V 4 H 4 V 2.5 Z');
     }
   }
 
@@ -134,7 +134,7 @@ export default class Logo extends Vue {
   }
 
   #shadow {
-    clip-path: url(#clip);
+    clip-path: circle(100% at 0 0);
     transition: d (2s/3) ease-out;
   }
 }
