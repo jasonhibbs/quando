@@ -43,6 +43,12 @@ const demoItems = [
     datetime: '2020-11-03T07:00:00Z',
     timezone: 'America/New_York',
   },
+  {
+    id: 'demo-0006',
+    label: 'WHO declared COVID-19 a pandemic',
+    datetime: '2020-03-11T22:00:00Z',
+    timezone: 'Europe/London',
+  },
 ]
 
 export default new Vuex.Store({
@@ -56,14 +62,7 @@ export default new Vuex.Store({
     user: {
       timezone: 'Europe/London',
     },
-    items: [
-      {
-        id: '00000000-0000-0000-0000-000000000000',
-        label: 'WHO declared COVID-19 a pandemic',
-        datetime: '2020-03-11T22:00:00Z',
-        timezone: 'Europe/London',
-      },
-    ],
+    items: [],
   },
   getters: {
     getItemById: state => (id: string) => {
