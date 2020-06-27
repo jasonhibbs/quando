@@ -38,5 +38,13 @@ export default class Message extends Vue {
     background-color: var(--color-bad-10);
     border-left-color: var(--color-bad);
   }
+
+  & :first-child {
+    margin-top: 0;
+  }
+
+  & :last-child {
+    margin-bottom: 0;
+  }
 }
 </style>

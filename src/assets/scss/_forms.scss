@@ -70,4 +70,8 @@
   & + .form-block-control {
     margin-left: rem(var(--space-smallest));
   }
+
+  &._min {
+    flex: none;
+  }
 }

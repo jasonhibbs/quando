@@ -15,59 +15,62 @@
     main
       .layout
 
-        h2 Data
-        p Quando stores data directly on your device so you can always access them offline.
+        h2#data Data
+        p Quando stores data directly on your device so you can always access them offline. You have {{ items.length }} {{ items.length === 1 ? 'time' : 'times' }} on this device.
 
-        h3 Export
+        h3#import Import
+        p Add times copied from a Quando export.
+        form(@submit.prevent="onSubmitImport")
+          .form-block._input
+            .form-block-controls._inline
+              .form-block-control
+                input(
+                  aria-label="Paste import data"
+                  placeholder="Paste here"
+                  v-model="importString"
+                )
+              .form-block-control._min
+                button._key(type="submit") Import
+
+          message(
+            v-if="importedItems !== null"
+            :type="importedItems < 0 ? 'bad' : 'good'"
+          )
+            p {{ importFeedback }}
+
+        h3#export Export
         p Copy your times to paste into another Quando.
-        .form-block
+        .form-block._input
           .form-block-controls._inline
             .form-block-control
               input(
+                aria-label="Export data for copying"
                 readonly
                 :value="exportString"
                 @click="onFocusExport"
                 @focus="onFocusExport"
               )
-            .form-block-control
+            .form-block-control._min
               copyButton._key(
                 :copy="exportString"
               )
 
-        h2 Import
-        p Add times copied from a Quando export.
-        form(@submit.prevent="onSubmitImport")
-          .form-block
-            .form-block-controls._inline
-              .form-block-control
-                input(
-                  placeholder="Paste here"
-                  v-model="importString"
-                )
-              .form-block-control
-                button._key(type="submit") Import
-
-        p
-          message(
-            v-if="importedItems !== null"
-            :type="importedItems < 0 ? 'bad' : 'good'"
-          ) {{ importFeedback }}
-
-        h2 Clear
-        p Reset Quando and remove your times.
+        h3#delete Delete
+        p Reset Quando and delete your times.
         button._bad(
           @click="onClickClear"
-        ) Clear Times
-        p
-          message(v-if="itemsCleared" type="good") All times removed
+        ) Delete Times
 
-        h2 Demo
+        message(v-if="itemsCleared" type="good")
+          p All times removed
+
+        h3#demo Demo
         p Add some example items for fun.
         button(
           @click="onClickDemo"
         ) Add Demo Times
-        p
-          message(v-if="demoItemsAdded" type="good") Added the demo items
+        message(v-if="demoItemsAdded" type="good")
+          p Added the demo items
 
     footer
       .layout
@@ -142,7 +145,9 @@ export default class More extends Vue {
     this.resetMessages()
     if (this.importItems.length) {
       const newItems = this.importItems.filter((x: any) => {
-        return !this.existingIds.includes(x.id)
+        const isDupe = this.existingIds.includes(x.id)
+        const isTime = x.id && x.label && x.datetime && x.timezone
+        return !isDupe && isTime
       })
 
       this.importedItems = newItems.length
@@ -184,6 +189,14 @@ export default class More extends Vue {
   & h2,
   & h3 {
     margin: rem(60) auto rem(12);
+  }
+
+  & p {
+    margin-top: 0;
+  }
+
+  & .message {
+    margin-top: var(--space-rem-small);
   }
 }
 

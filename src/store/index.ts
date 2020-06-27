@@ -72,8 +72,11 @@ export default new Vuex.Store({
   },
   mutations: {
     pushDemoItems(state) {
-      const allItems = state.items.concat(demoItems)
-      state.items = [...new Set(allItems)]
+      const existing = state.items.map((x: any) => x.id)
+      const newDemoItems = demoItems.filter(
+        (x: any) => !existing.includes(x.id)
+      )
+      state.items = state.items.concat(newDemoItems)
     },
     removeItems(state) {
       state.items = []
