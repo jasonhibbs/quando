@@ -25,6 +25,7 @@
             .form-block-controls._inline
               .form-block-control
                 input(
+                  type="text"
                   aria-label="Paste import data"
                   placeholder="Paste here"
                   v-model="importString"
@@ -44,8 +45,9 @@
           .form-block-controls._inline
             .form-block-control
               input(
-                aria-label="Export data for copying"
+                type="text"
                 readonly
+                aria-label="Export data for copying"
                 :value="exportString"
                 @click="onFocusExport"
                 @focus="onFocusExport"
@@ -186,9 +188,15 @@ export default class More extends Vue {
 @import '../assets/scss/util';
 
 .screen-more {
-  & h2,
+  & main {
+    padding-bottom: rem(80);
+  }
+
+  & h2 {
+    margin: rem(36) auto rem(12);
+  }
   & h3 {
-    margin: rem(60) auto rem(12);
+    margin: rem(48) auto rem(12);
   }
 
   & p {
