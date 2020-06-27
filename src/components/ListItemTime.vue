@@ -82,10 +82,11 @@ export default class ListItemTime extends Vue {
     const t = this.tick // force update
     const then = new Date(this.time.datetime)
     const now = new Date()
+    const isInPast = +then < +now
     const options: any = {
       addSuffix: true,
       unit: this.displayUnits,
-      roundingMethod: this.displayUnits ? 'floor' : 'round',
+      roundingMethod: this.displayUnits || isInPast ? 'floor' : 'round',
     }
     const string = formatDistanceStrict(then, now, options)
     return this.parseThousands(string)
@@ -145,6 +146,7 @@ div > .times-item-inner {
 }
 .times-item-time {
   font-size: clamp(1.5rem, 8vw, em(48));
+  text-indent: (1em/-20);
 }
 
 ._unit-second .times-item-time {

@@ -37,6 +37,10 @@
 
 .form-block-hint {
   color: var(--contrast-darker);
+
+  .form-block-controls + & {
+    margin-top: var(--space-rem-small);
+  }
 }
 
 .form-block-controls {
@@ -65,5 +69,9 @@
 
   & + .form-block-control {
     margin-left: rem(var(--space-smallest));
+  }
+
+  &._min {
+    flex: none;
   }
 }
