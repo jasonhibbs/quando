@@ -12,6 +12,39 @@ const vuexLocalStorage = new VuexPersistence({
   }),
 })
 
+const demoItems = [
+  {
+    id: 'demo-0001',
+    label: 'WHO declared COVID-19 a pandemic',
+    datetime: '2020-03-11T22:00:00Z',
+    timezone: 'Europe/London',
+  },
+  {
+    id: 'demo-0002',
+    label: 'Fall of the Berlin Wall',
+    datetime: '1989-11-09T18:53:00Z',
+    timezone: 'Europe/Berlin',
+  },
+  {
+    id: 'demo-0003',
+    label: '2024 UK General Election',
+    datetime: '2024-05-02T07:00:00Z',
+    timezone: 'Europe/London',
+  },
+  {
+    id: 'demo-0004',
+    label: '2030',
+    datetime: '2030-01-01T00:00:00Z',
+    timezone: 'Europe/London',
+  },
+  {
+    id: 'demo-0005',
+    label: '2020 US Presidential Election',
+    datetime: '2020-11-03T07:00:00Z',
+    timezone: 'America/New_York',
+  },
+]
+
 export default new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
@@ -26,7 +59,7 @@ export default new Vuex.Store({
     items: [
       {
         id: '00000000-0000-0000-0000-000000000000',
-        label: 'WHO declares COVID-19 a pandemic',
+        label: 'WHO declared COVID-19 a pandemic',
         datetime: '2020-03-11T22:00:00Z',
         timezone: 'Europe/London',
       },
@@ -38,6 +71,13 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    pushDemoItems(state) {
+      const allItems = state.items.concat(demoItems)
+      state.items = [...new Set(allItems)]
+    },
+    removeItems(state) {
+      state.items = []
+    },
     addItem(state, item) {
       state.items.push(item)
     },
