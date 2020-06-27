@@ -206,6 +206,11 @@ export default class More extends Vue {
   & .message {
     margin-top: var(--space-rem-small);
   }
+
+  & input[readonly] {
+    --border-color: var(--contrast-light);
+    --background-color: transparent;
+  }
 }
 
 footer {
