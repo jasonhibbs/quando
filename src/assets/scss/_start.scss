@@ -18,7 +18,8 @@ input {
 
 .list-copy {
   @extend .layout;
-  color: var(--contrast-darker);
+  margin-top: var(--space-rem-biggest);
+  text-align: center;
 }
 
 .bar {

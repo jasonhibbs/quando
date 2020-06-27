@@ -50,7 +50,8 @@ html {
   outline: 3px solid var(--color-focus);
 }
 
-a {
+a,
+.link {
   color: var(--color-key);
   text-decoration: none;
   transition: color 0.1s, background-color 0.1s, outline-color 0.1s;
