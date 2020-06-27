@@ -16,7 +16,8 @@
       .layout
 
         h2#data Data
-        p Quando stores data directly on your device so you can always access them offline. You have {{ items.length }} {{ items.length === 1 ? 'time' : 'times' }} on this device.
+        p Quando saves times on your device so they’re always available offline.
+        p You have {{ items.length }} {{ items.length === 1 ? 'time' : 'times' }} on this device.
 
         h3#import Import
         p Add times copied from a Quando export.
