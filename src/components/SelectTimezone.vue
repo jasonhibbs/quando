@@ -44,7 +44,7 @@ export default class SelectTimezone extends Vue {
     const target = this.target ? new Date(this.target) : new Date()
     const timeZone = this.value || this.user.timezone
     const zonedTime = utcToZonedTime(target, timeZone)
-    let zone = {
+    const zone = {
       timeZone,
       locale: enGB,
     }

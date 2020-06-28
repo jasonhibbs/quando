@@ -35,10 +35,12 @@
                 button._key(
                   type="submit"
                   :disabled="!importableItems.length"
-                ) Import
+                )
+                  .button-label Import
 
           message(
             v-if="importString && importedItems === null"
+            aria-live="polite"
           )
             p(v-if="importableItems.length") Found {{ importableItems.length }} new {{ importableItems.length === 1 ? 'time' : 'times' }}
             p(v-if="!importableItems.length") No new times found
@@ -46,6 +48,7 @@
           message(
             v-if="importedItems !== null"
             :type="importedItems < 0 ? 'bad' : 'good'"
+            aria-live="polite"
           )
             p {{ importFeedback }}
 
@@ -73,7 +76,10 @@
           @click="onClickClear"
         ) Delete Times
 
-        message(v-if="itemsCleared" type="good")
+        message(v-if="itemsCleared"
+          type="good"
+          aria-live="polite"
+        )
           p All times removed
 
         h3#demo Demo
@@ -81,7 +87,10 @@
         button(
           @click="onClickDemo"
         ) Add Demo Times
-        message(v-if="demoItemsAdded" type="good")
+        message(v-if="demoItemsAdded"
+          type="good"
+          aria-live="polite"
+        )
           p Added the demo items
 
     footer

@@ -13,7 +13,7 @@ export default class Message extends Vue {
   @Prop() private type?: string
 
   get classes() {
-    let classes = []
+    const classes = []
 
     if (this.type) {
       classes.push(`_${this.type}`)
