@@ -102,6 +102,7 @@ export default class ListItemTime extends Vue {
 
 .times-item {
   display: block;
+  line-height: 1.25;
   box-shadow: 0 1px 0 var(--contrast-lightest);
 }
 
