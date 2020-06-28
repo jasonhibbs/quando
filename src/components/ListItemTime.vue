@@ -88,12 +88,12 @@ export default class ListItemTime extends Vue {
       unit: this.displayUnits,
       roundingMethod: this.displayUnits || isInPast ? 'floor' : 'round',
     }
-    const string = formatDistanceStrict(then, now, options)
-    return this.parseThousands(string)
+    const s = formatDistanceStrict(then, now, options)
+    return this.parseThousands(s)
   }
 
-  parseThousands(string: string) {
-    return string.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  parseThousands(s: string) {
+    return s.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 }
 </script>

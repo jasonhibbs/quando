@@ -169,7 +169,7 @@ export default class More extends Vue {
     this.resetMessages()
     if (this.importableItems.length) {
       this.importedItems = this.importableItems.length
-      for (let item of this.importableItems) {
+      for (const item of this.importableItems) {
         this.$store.commit('addItem', item)
       }
     } else {

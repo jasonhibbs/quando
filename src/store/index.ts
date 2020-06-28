@@ -36,7 +36,7 @@ export default new Vuex.Store({
   mutations: {
     pushDemoItems(state) {
       const existing = state.items.map((x: any) => x.id)
-      for (let item of demoItems) {
+      for (const item of demoItems) {
         if (!existing.includes(item.id)) {
           state.items.push(item)
         }
