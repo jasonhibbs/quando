@@ -233,7 +233,7 @@ export default class More extends Vue {
 }
 
 footer {
-  background-color: var(--contrast-lightest);
+  box-shadow: 0 -1px 0 var(--contrast-lighter);
   padding: rem(12) 0 rem(96);
 
   & p {
