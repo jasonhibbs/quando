@@ -4,12 +4,68 @@ import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
+const localStorageKey = 'quando'
+
 const vuexLocalStorage = new VuexPersistence({
-  key: 'since-then',
+  key: localStorageKey,
   storage: window.localStorage,
   reducer: (state: any) => ({
     items: state.items,
   }),
+})
+
+export default new Vuex.Store({
+  plugins: [vuexLocalStorage.plugin],
+  state: {
+    ui: {
+      reloading: false,
+      worker: null,
+      updateAvailable: false,
+    },
+    user: {
+      timezone: 'Europe/London',
+      consent: false,
+    },
+    items: [] as any[],
+  },
+  getters: {
+    getItemById: state => (id: string) => {
+      return state.items.find(item => item.id === id)
+    },
+  },
+  mutations: {
+    pushDemoItems(state) {
+      const existing = state.items.map((x: any) => x.id)
+      for (let item of demoItems) {
+        if (!existing.includes(item.id)) {
+          state.items.push(item)
+        }
+      }
+    },
+    removeItems(state) {
+      state.items = []
+      window.setTimeout(() => {
+        window.localStorage.removeItem(localStorageKey)
+      }, 10)
+    },
+    addItem(state, item) {
+      state.items.push(item)
+    },
+    updateItem(state, updatedItem) {
+      const i = state.items.findIndex(item => item.id === updatedItem.id)
+      state.items.splice(i, 1, updatedItem)
+    },
+    removeItemById(state, id) {
+      const i = state.items.findIndex(item => item.id === id)
+      state.items.splice(i, 1)
+    },
+    workerFoundUpdate(state, worker) {
+      state.ui.worker = worker
+      state.ui.updateAvailable = true
+    },
+  },
+  actions: {},
+  modules: {},
 })
 
 const demoItems = [
@@ -50,52 +106,3 @@ const demoItems = [
     timezone: 'Europe/London',
   },
 ]
-
-export default new Vuex.Store({
-  plugins: [vuexLocalStorage.plugin],
-  state: {
-    ui: {
-      reloading: false,
-      worker: null,
-      updateAvailable: false,
-    },
-    user: {
-      timezone: 'Europe/London',
-    },
-    items: [],
-  },
-  getters: {
-    getItemById: state => (id: string) => {
-      return state.items.find(item => item.id === id)
-    },
-  },
-  mutations: {
-    pushDemoItems(state) {
-      const existing = state.items.map((x: any) => x.id)
-      const newDemoItems = demoItems.filter(
-        (x: any) => !existing.includes(x.id)
-      )
-      state.items = state.items.concat(newDemoItems)
-    },
-    removeItems(state) {
-      state.items = []
-    },
-    addItem(state, item) {
-      state.items.push(item)
-    },
-    updateItem(state, updatedItem) {
-      const i = state.items.findIndex(item => item.id === updatedItem.id)
-      state.items.splice(i, 1, updatedItem)
-    },
-    removeItemById(state, id) {
-      const i = state.items.findIndex(item => item.id === id)
-      state.items.splice(i, 1)
-    },
-    workerFoundUpdate(state, worker) {
-      state.ui.worker = worker
-      state.ui.updateAvailable = true
-    },
-  },
-  actions: {},
-  modules: {},
-})
