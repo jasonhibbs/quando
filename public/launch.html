@@ -16,20 +16,29 @@
 
       :root {
         --scale: 1;
-        /* background-color: #fff; */
-        background-color: #000;
+        background-color: #fff;
         box-sizing: border-box;
         height: 100%;
         -webkit-font-smoothing: antialiased;
       }
 
-      /*
-        Not supported
-        @media (prefers-color-scheme: dark) {
+      .dark {
+        display: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
         :root {
           background-color: #000;
         }
-      } */
+
+        .light {
+          display: none;
+        }
+
+        .dark {
+          display: block;
+        }
+      }
 
       /* (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) */
       /* (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) */
@@ -108,8 +117,8 @@
       pwa-asset-generator public/launch.html public/img/launch --splash-only
       pwa-asset-generator public/launch.html public/img/launch --splash-only --dark-mode
     -->
-    <!-- <img src="./img/icons/apple-touch-icon-alt-1024.png" /> -->
-    <img src="./img/icons/apple-touch-icon-dark-1024.png" />
+    <img class="light" src="./img/icons/icon-1024.png" />
+    <img class="dark" src="./img/icons/icon-1024.png" />
   </body>
 </html>
 
