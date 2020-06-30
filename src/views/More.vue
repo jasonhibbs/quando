@@ -42,7 +42,7 @@
             v-if="importString && importedItems === null"
             aria-live="polite"
           )
-            p(v-if="importableItems.length") Found {{ importableItems.length }} new {{ importableItems.length === 1 ? 'time' : 'times' }}
+            p(v-if="importableItems.length") Ready to import {{ importableItems.length }} new {{ importableItems.length === 1 ? 'time' : 'times' }}
             p(v-if="!importableItems.length") No new times found
 
           message(

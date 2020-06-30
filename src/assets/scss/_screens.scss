@@ -18,7 +18,7 @@ $slide-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
     width: 100vw;
     height: 100vh;
     transform: translateX(-100%);
-    z-index: 98;
+    z-index: 9;
     opacity: 0;
     background-color: var(--shade-light);
     will-change: opacity;
@@ -29,7 +29,7 @@ $slide-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
 // Foreground
 .slide-left-enter-active,
 .slide-right-leave-active {
-  z-index: 99;
+  z-index: 10;
   position: fixed;
   top: 0;
   right: 0;

@@ -24,7 +24,7 @@ export default new Vuex.Store({
     },
     user: {
       timezone: 'Europe/London',
-      consent: false,
+      storageUnderstood: false,
     },
     items: [] as any[],
   },
@@ -58,6 +58,9 @@ export default new Vuex.Store({
     removeItemById(state, id) {
       const i = state.items.findIndex(item => item.id === id)
       state.items.splice(i, 1)
+    },
+    understoodStorage(state) {
+      state.user.storageUnderstood = true
     },
     workerFoundUpdate(state, worker) {
       state.ui.worker = worker
