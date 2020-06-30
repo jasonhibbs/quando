@@ -16,7 +16,7 @@
         )
           .layout
             h1 Your Data
-            p This app saves your data to local storage. You can delete this in the #[a(href="/more/#delete") “More” menu] at any&nbsp;time.
+            p This app saves your data to local storage. You can delete this in the #[router-link(to="/more/#delete") “More” menu] at{{`\u00A0`}}any{{`\u00A0`}}time.
             button(type="submit") Understood
 
     transition(:name="transitionName")
@@ -115,6 +115,7 @@ dialog {
   z-index: 99;
   border: none;
   width: max-content;
+  max-width: 100%;
   height: auto;
   padding: 0;
   border-radius: 12px 12px 0 0;
@@ -123,13 +124,13 @@ dialog {
   text-align: center;
 
   & form {
-    padding: rem(20);
-    padding-bottom: rem(72);
+    padding: rem(28) rem(20);
+    padding-bottom: calc((60rem / 16) + env(safe-area-inset-bottom));
   }
 
   & .layout {
     width: auto;
-    max-width: rem(360);
+    max-width: rem(366);
   }
 
   & h1 {
@@ -142,7 +143,7 @@ dialog {
     border-radius: 12px;
 
     & form {
-      padding-bottom: rem(28);
+      padding: rem(28);
     }
   }
 }
