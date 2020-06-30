@@ -108,19 +108,23 @@ export default class App extends Vue {
 @import 'assets/scss/util';
 
 dialog {
+  background-color: var(--color-root);
+  color: var(--color-text);
   position: fixed;
   bottom: 0;
   z-index: 99;
   border: none;
-  padding: rem(20);
-  padding-bottom: rem(72);
+  width: max-content;
+  height: auto;
+  padding: 0;
   border-radius: 12px 12px 0 0;
-  box-shadow: 0 0 12px var(--shade-light), 0 0 0 1px var(--shade-lighter);
+  box-shadow: 0 0 12px var(--contrast-light), 0 0 0 1px var(--contrast-lighter);
 
   text-align: center;
 
-  ::backdrop {
-    bottom: blue;
+  & form {
+    padding: rem(20);
+    padding-bottom: rem(72);
   }
 
   & .layout {
@@ -136,7 +140,10 @@ dialog {
   @media (min-width: 480px) {
     bottom: rem(40);
     border-radius: 12px;
-    padding: rem(28);
+
+    & form {
+      padding-bottom: rem(28);
+    }
   }
 }
 
