@@ -16,7 +16,7 @@
         )
           .layout
             h1 Your Data
-            p This app saves your data to local storage. You can delete this in the #[a(href="/more/#delete") #[em More] menu] at any&nbsp;time.
+            p This app saves your data to local storage. You can delete this in the #[a(href="/more/#delete") “More” menu] at any&nbsp;time.
             button(type="submit") Understood
 
     transition(:name="transitionName")

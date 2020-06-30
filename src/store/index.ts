@@ -11,6 +11,9 @@ const vuexLocalStorage = new VuexPersistence({
   storage: window.localStorage,
   reducer: (state: any) => ({
     items: state.items,
+    user: {
+      storageUnderstood: state.user.storageUnderstood,
+    },
   }),
 })
 
