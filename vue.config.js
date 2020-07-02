@@ -19,7 +19,6 @@ module.exports = {
   },
   pwa: {
     name: 'Quando',
-    start_url: '/times',
     themeColor: '#fff',
     appleMobileWebAppCapable: 'yes',
     iconPaths: {
@@ -32,6 +31,7 @@ module.exports = {
     },
     msTileColor: '#0055ff',
     manifestOptions: {
+      start_url: '/times',
       background_color: '#fff',
       theme_color: 'transparent',
     },
