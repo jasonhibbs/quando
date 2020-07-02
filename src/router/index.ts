@@ -18,7 +18,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: 'Home',
     component: Home,
-    redirect: '/times/',
+    // redirect: '/times/',
   },
   {
     path: '/more/',

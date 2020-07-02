@@ -7,7 +7,7 @@
       appear
     )
       dialog(
-        v-if="!isStorageUnderstood"
+        v-if="isStorageDialogWarranted"
         open
       )
         form(
@@ -43,6 +43,8 @@ export default class App extends Vue {
   isStandalone = window.matchMedia('(display-mode: standalone)').matches
   isIos = /iPhone|iPad|iPod/.test(navigator.userAgent)
 
+  // Lifecycle
+
   created() {
     if (this.isStandalone) {
       document.documentElement.classList.add('is-app')
@@ -68,17 +70,27 @@ export default class App extends Vue {
     }
   }
 
+  // Storage Understanding
+
   get isStorageUnderstood() {
     return this.user.storageUnderstood || this.items.length
+  }
+
+  get isStorageDialogWarranted() {
+    return this.$route.name !== 'Home' && !this.isStorageUnderstood
   }
 
   onStorageUnderstood() {
     this.$store.commit('understoodStorage')
   }
 
+  // Worker
+
   onWorkerUpdated(e: any) {
     this.$store.commit('workerFoundUpdate', e.detail)
   }
+
+  // Changes
 
   onDarkModeChange(query: any) {
     const metaThemeColor = document.querySelector('meta[name="theme-color"]')
