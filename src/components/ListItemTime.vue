@@ -1,56 +1,32 @@
 <template lang="pug">
 
   component.times-item(
-    :class="classes"
     :is="tag"
     :to="href"
   )
     .times-item-inner
       .times-item-label {{ timeLabel }}
-      .times-item-time {{ timeString }}
+      .times-item-time
+        time-string(
+          :datetime="time.datetime"
+          :unit="time.display"
+        )
 
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { formatDistanceStrict } from 'date-fns'
+import TimeString from '@/components/TimeString.vue'
 
-@Component
+@Component({
+  components: { TimeString },
+})
 export default class ListItemTime extends Vue {
   @Prop() time!: {
     id?: string
     label: string
     datetime: string
     display?: string
-  }
-
-  tick: number = 0
-  tickInterval: any = null
-
-  get classes() {
-    return this.displayUnits ? `_unit-${this.displayUnits}` : ''
-  }
-
-  mounted() {
-    if (this.displayUnits === 'second') {
-      this.tickInterval = setInterval(() => {
-        this.tick++
-      }, 1000)
-    }
-
-    if (this.displayUnits === 'minute') {
-      const now = new Date()
-      const offset = now.getSeconds() * 1000 + now.getMilliseconds()
-      setTimeout(() => {
-        this.tick++
-        this.tickInterval = setInterval(() => {
-          this.tick++
-        }, 1000 * 60)
-      }, 60000 - offset)
-    }
-  }
-
-  beforeDestroy() {
-    clearInterval(this.tickInterval)
   }
 
   get id() {
@@ -67,33 +43,6 @@ export default class ListItemTime extends Vue {
 
   get timeLabel() {
     return this.time.label
-  }
-
-  get displayUnits() {
-    return this.time.display && this.time.display !== 'auto'
-      ? this.time.display
-      : undefined
-  }
-
-  get timeString() {
-    if (!this.time.datetime) {
-      return 'Anon'
-    }
-    const t = this.tick // force update
-    const then = new Date(this.time.datetime)
-    const now = new Date()
-    const isInPast = +then < +now
-    const options: any = {
-      addSuffix: true,
-      unit: this.displayUnits,
-      roundingMethod: this.displayUnits || isInPast ? 'floor' : 'round',
-    }
-    const s = formatDistanceStrict(then, now, options)
-    return this.parseThousands(s)
-  }
-
-  parseThousands(s: string) {
-    return s.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 }
 </script>
@@ -148,9 +97,5 @@ div > .times-item-inner {
 .times-item-time {
   font-size: clamp(1.5rem, 8vw, em(48));
   text-indent: (1em/-20);
-}
-
-._unit-second .times-item-time {
-  font-variant: tabular-nums;
 }
 </style>

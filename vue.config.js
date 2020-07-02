@@ -19,6 +19,7 @@ module.exports = {
   },
   pwa: {
     name: 'Quando',
+    start_url: '/times',
     themeColor: '#fff',
     appleMobileWebAppCapable: 'yes',
     iconPaths: {
