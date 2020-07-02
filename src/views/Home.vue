@@ -9,11 +9,20 @@
 
     main
       .layout
-        p Quando lets you count the days.
+        p.headline
+          template(v-if="!isWeekend") Weekend starts&puncsp;
+          template(v-if="isWeekend") Sorry, it‘s Monday&puncsp;
+          time-string(
+            :datetime="targetTime"
+            :unit="'hour'"
+          )
+          | .
 
-        router-link.button(
-          :to="{ name: 'List' }"
-        ) List
+        p.tagline Quando counts the days.
+
+        router-link.button._key(
+          :to="{ name: 'New' }"
+        ) Count your own times
 
 
 </template>
@@ -22,11 +31,43 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import Logo from '@/components/Logo.vue'
+import TimeString from '@/components/TimeString.vue'
 
 @Component({
-  components: { Logo },
+  components: { Logo, TimeString },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  get date() {
+    return new Date()
+  }
+
+  get isWeekend() {
+    const day = this.date.getDay()
+    const hour = this.date.getHours()
+
+    if (day < 1 || (day > 4 && hour > 16)) {
+      return true
+    }
+
+    return false
+  }
+
+  get targetTime() {
+    const t = this.date
+
+    if (!this.isWeekend) {
+      const friday = t.getDate() + ((12 - t.getDay()) % 7)
+      t.setDate(friday)
+      t.setHours(17, 0, 0, 0)
+    } else {
+      const monday = t.getDate() + ((8 - t.getDay()) % 7)
+      t.setDate(monday)
+      t.setHours(0, 0, 0, 0)
+    }
+
+    return t.toISOString()
+  }
+}
 </script>
 
 <style lang="scss">
@@ -39,6 +80,18 @@ export default class Home extends Vue {}
 
   header h1 {
     margin: 0;
+  }
+
+  & .headline {
+    font-size: clamp(2rem, 6vw, 5rem);
+    line-height: (36/32);
+    margin: 0 0 rem(12);
+  }
+
+  & .tagline {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: (28/24);
+    margin: 0 0 em(40, 24);
   }
 }
 </style>

@@ -80,6 +80,10 @@ export default class NewComponent extends Vue {
 </script>
 
 <style lang="scss">
+.time-string {
+  white-space: nowrap;
+}
+
 .time-string[data-unit='second'] {
   font-variant: tabular-nums;
 }
