@@ -27,20 +27,20 @@
               min="0101-01-01"
               max="9999-12-31"
               required
-              v-model="modelDate"
+              v-model="model.date"
             ) Date
 
             form-block-input#input-time(
               type="time"
               placeholder="HH:MM"
               required
-              v-model="modelTime"
+              v-model="model.time"
             ) Time
               template(#after-control)
                 .form-block-control._min
                   select-timezone(
                     :target="modelDatetime"
-                    v-model="timezoneSelected"
+                    v-model="model.timezone"
                   )
 
           .form-block._inline
@@ -49,12 +49,12 @@
               type="text"
               required
               :placeholder="placeholder"
-              v-model="modelLabel"
+              v-model="model.label"
             ) Label
 
             form-block-select#input-display._min(
               :options="displayOptions"
-              v-model="modelDisplay"
+              v-model="model.display"
             ) Units
 
           .form-block
@@ -97,11 +97,14 @@ import ListItemTime from '@/components/ListItemTime.vue'
 })
 export default class ItemNew extends Vue {
   user!: any
-  modelLabel: string = ''
-  modelDate: string = ''
-  modelTime: string = ''
-  modelDisplay: string = 'auto'
-  timezoneSelected = ''
+
+  model = {
+    label: '',
+    date: '',
+    time: '',
+    timezone: '',
+    display: '',
+  }
 
   displayOptions = [
     { label: 'Auto', value: 'auto' },
@@ -126,12 +129,13 @@ export default class ItemNew extends Vue {
   // Setup
 
   setupModel() {
-    this.modelLabel = this.item.label
-    this.timezoneSelected = this.item.timezone || ''
-    this.modelDisplay = this.item.display || 'auto'
-    const zonedTime = utcToZonedTime(this.item.datetime, this.modelTimezone)
-    this.modelDate = lightFormat(zonedTime, 'yyyy-MM-dd')
-    this.modelTime = lightFormat(zonedTime, 'HH:mm:ss')
+    this.model.label = this.item.label
+    this.model.timezone = this.item.timezone || ''
+    this.model.display = this.item.display || 'auto'
+
+    const zonedTime = utcToZonedTime(this.item.datetime, this.model.timezone)
+    this.model.date = lightFormat(zonedTime, 'yyyy-MM-dd')
+    this.model.time = lightFormat(zonedTime, 'HH:mm:ss')
   }
 
   get placeholder() {
@@ -148,10 +152,10 @@ export default class ItemNew extends Vue {
 
   get preview() {
     return {
-      label: this.modelLabel || this.placeholder,
+      label: this.model.label || this.placeholder,
       datetime: this.modelDatetime,
-      timezone: this.modelTimezone,
-      display: this.modelDisplay || 'auto',
+      timezone: this.model.timezone,
+      display: this.model.display || 'auto',
     }
   }
 
@@ -162,18 +166,18 @@ export default class ItemNew extends Vue {
   get modelDatetime() {
     if (!this.isDateValid) return ''
     return zonedTimeToUtc(
-      `${this.modelDate} ${this.modelTime}`,
-      this.modelTimezone
+      `${this.model.date} ${this.model.time}`,
+      this.model.timezone
     ).toISOString()
   }
 
   get updatedItem() {
     return {
       id: this.itemId,
-      label: this.modelLabel,
+      label: this.model.label,
       datetime: this.modelDatetime,
-      timezone: this.modelTimezone,
-      display: this.modelDisplay,
+      timezone: this.model.timezone,
+      display: this.model.display,
     }
   }
 
@@ -188,7 +192,7 @@ export default class ItemNew extends Vue {
   // Validation
 
   get isDateValid() {
-    return !isNaN(Date.parse(this.modelDate))
+    return !isNaN(Date.parse(this.model.date))
   }
 
   get isDatetimeValid() {
@@ -196,14 +200,14 @@ export default class ItemNew extends Vue {
   }
 
   get isModelValid() {
-    return this.modelLabel && this.modelDatetime && this.isDatetimeValid
+    return this.model.label && this.modelDatetime && this.isDatetimeValid
   }
 
   get isModelDifferent() {
-    const labelChanged = this.item.label !== this.modelLabel
+    const labelChanged = this.item.label !== this.model.label
     const datetimeChanged = this.item.datetime !== this.modelDatetime
-    const timezoneChanged = this.item.timezone !== this.modelTimezone
-    const displayChanged = this.item.display !== this.modelDisplay
+    const timezoneChanged = this.item.timezone !== this.model.timezone
+    const displayChanged = this.item.display !== this.model.display
     return labelChanged || datetimeChanged || timezoneChanged || displayChanged
   }
 
