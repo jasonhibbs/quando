@@ -160,7 +160,7 @@ export default class ItemNew extends Vue {
   }
 
   get modelTimezone() {
-    return this.timezoneSelected || this.user.timezone
+    return this.model.timezone || this.user.timezone
   }
 
   get modelDatetime() {
