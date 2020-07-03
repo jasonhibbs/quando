@@ -104,8 +104,10 @@ export default class ItemNew extends Vue {
     { label: 'Auto', value: 'auto' },
     { label: 'Seconds', value: 'second' },
     { label: 'Minutes', value: 'minute' },
+    { label: 'Hours', value: 'hour' },
     { label: 'Days', value: 'day' },
-    { label: 'Month', value: 'month' },
+    { label: 'Months', value: 'month' },
+    { label: 'Years', value: 'year' },
   ]
 
   // Setup
