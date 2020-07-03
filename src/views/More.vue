@@ -29,6 +29,8 @@
                   type="text"
                   aria-label="Paste import data"
                   placeholder="Paste here"
+                  spellcheck="false"
+                  autocapitalize="off"
                   v-model="importString"
                 )
               .form-block-control._min
@@ -183,6 +185,21 @@ export default class More extends Vue {
       }
     } else {
       this.importedItems = -1
+    }
+  }
+
+  async onFocusImport() {
+    if (!navigator.clipboard) {
+      return
+    }
+    // if there’s clipboard data, get it
+    const text = await navigator.clipboard.readText()
+    // if it’s JSON, insert it
+    try {
+      const parse = JSON.parse(text)
+      this.importString = text
+    } catch (error) {
+      // this is fine
     }
   }
 
