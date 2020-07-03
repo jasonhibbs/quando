@@ -130,7 +130,7 @@ export default class ItemNew extends Vue {
 
   setupModel() {
     this.model.label = this.item.label
-    this.model.timezone = this.item.timezone || ''
+    this.model.timezone = this.item.timezone || this.user.timezone
     this.model.display = this.item.display || 'auto'
 
     const zonedTime = utcToZonedTime(this.item.datetime, this.model.timezone)
@@ -157,10 +157,6 @@ export default class ItemNew extends Vue {
       timezone: this.model.timezone,
       display: this.model.display || 'auto',
     }
-  }
-
-  get modelTimezone() {
-    return this.model.timezone || this.user.timezone
   }
 
   get modelDatetime() {
