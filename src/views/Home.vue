@@ -11,7 +11,7 @@
       .layout
         p.headline
           template(v-if="!isWeekend") Weekend starts&puncsp;
-          template(v-if="isWeekend") Sorry, it‘s Monday&puncsp;
+          template(v-if="isWeekend") It will be Monday&puncsp;
           time-string(
             :datetime="targetTime"
             :unit="'hour'"
@@ -20,9 +20,15 @@
 
         p.tagline Quando counts the days.
 
-        router-link.button._key(
-          :to="{ name: 'New' }"
-        ) Count your own times
+        template(v-if="items.length")
+          router-link.button._key(
+            :to="{ name: 'List' }"
+          ) Go to your times
+
+        template(v-else)
+          router-link.button._key(
+            :to="{ name: 'New' }"
+          ) Count your own time
 
 
 </template>
@@ -35,8 +41,11 @@ import TimeString from '@/components/TimeString.vue'
 
 @Component({
   components: { Logo, TimeString },
+  computed: mapState(['items']),
 })
 export default class Home extends Vue {
+  items!: any
+
   get date() {
     return new Date()
   }
