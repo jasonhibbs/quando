@@ -32,8 +32,8 @@ module.exports = {
     msTileColor: '#0055ff',
     manifestOptions: {
       start_url: '/times',
-      background_color: '#fff',
-      theme_color: 'transparent',
+      background_color: '#ffffff',
+      theme_color: '#ffffff',
     },
   },
 }
