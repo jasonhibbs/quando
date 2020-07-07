@@ -105,10 +105,4 @@ const demoItems = [
     datetime: '2020-11-03T07:00:00Z',
     timezone: 'America/New_York',
   },
-  {
-    id: 'demo-0006',
-    label: 'WHO declared COVID-19 a pandemic',
-    datetime: '2020-03-11T22:00:00Z',
-    timezone: 'Europe/London',
-  },
 ]
