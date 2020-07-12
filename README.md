@@ -1,4 +1,4 @@
-<img src="public/img/icons/dial.png" width="48">
+<img src="public/img/icons/dial.png" width="56" alt="The quando logo, a sundial that looks like a Q">
 
 # quando
 
@@ -6,11 +6,11 @@ A small project for counting time (and learning PWAs).
 
 It’s may just be me, but the number of times thorughout my life I’ve wondered how many seconds old I am is at least 4. So I built this.
 
-### [Keep track of when that thing will happen (or when it did) ⏳](https://eye-test.netlify.app/)
+### [Keep track of when ⏳](https://eye-test.netlify.app/)
 
 ## About
 
-### Time
+### Time Entry
 
 This revisits a challenge I encountered working on developing promotional sites with specific launch times across the world. The [time entry form](https://quando.netlify.app/times/new) lets people specify a moment in time with typical knowledge, rather than requiring any specific [calendrical literacy](https://yourcalendricalfallacyis.com/).
 
@@ -20,17 +20,13 @@ Beyond that, [date-fns](https://github.com/date-fns/date-fns/tree/v2.0.0) handle
 
 ### Local Storage
 
-All times are stored in local storage thanks to [vuex-persist](https://github.com/championswimmer/vuex-persist). This requires consent and easy removal, so a banner requests this, and a menu helps remove everything.
+All times are stored in local storage thanks to [vuex-persist](https://github.com/championswimmer/vuex-persist). This requires consent and easy removal, so a banner explains and requests this, and a menu helps remove everything.
 
-The main drawback is that without accounts or central storage data doesn’t sync across installations and there’s no backup. For the limited scope of the project, I’ve added a copy/paste approach which is [mainly convenient across iCloud](https://support.apple.com/en-us/HT209460), but doesn’t exclude anybody who can share text across devices through other means.
-
-### Logo
-
-It’s a sundial, get it?
+The main drawback is no sync across installations and no backup. For the limited scope of the project, I’ve added a copy/paste approach which is [mainly convenient across iCloud](https://support.apple.com/en-us/HT209460), but doesn’t exclude anybody who can share text across devices by other means.
 
 ### Page Transitions
 
-Yes, the page transitions are modelled on the iOS page slide by using screen recording and measuring the easing curve.
+Yes, the page transitions are modelled on the iOS page slides from screen recordings by graphing pixel measurements per frame to derive a cubic-bezier value for the easing.
 
 No, I can’t prevent the transition from happening when swiping from the screen edge. [I know](https://github.com/vuejs/vue-router/issues/14).
 
