@@ -6,7 +6,7 @@ A small project for counting time (and learning PWAs).
 
 It’s may just be me, but the number of times thorughout my life I’ve wondered how many seconds old I am is at least 4. So I built this.
 
-### [Keep track of when ⏳](https://eye-test.netlify.app/)
+### [Keep track of when ⏳](https://quando.netlify.app/)
 
 ## About
 
