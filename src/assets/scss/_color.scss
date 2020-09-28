@@ -98,7 +98,7 @@ $shade-lightest: fade-out($color-black, 0.94);
   --color-text-error: #{$color-text-error};
 
   --color-root: var(--color-white);
-  --color-root-backdrop: #{fade-out(white, 0.3)};
+  --color-root-backdrop: #{fade-out(white, 0.28)};
 
   --color-contrast: var(--color-black);
   --color-shade: var(--color-black);
