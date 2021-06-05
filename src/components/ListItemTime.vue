@@ -15,7 +15,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { formatDistanceStrict } from 'date-fns'
 import TimeString from '@/components/TimeString.vue'
 
 @Component({
@@ -92,10 +91,10 @@ div > .times-item-inner {
 }
 
 .times-item-label {
-  font-size: clamp(1rem, 5vw, em(32));
+  font-size: clamp(1rem, 5vw, #{em(32)});
 }
 .times-item-time {
-  font-size: clamp(1.5rem, 8vw, em(48));
+  font-size: clamp(1.5rem, 8vw, #{em(48)});
   text-indent: (1em/-20);
 }
 </style>

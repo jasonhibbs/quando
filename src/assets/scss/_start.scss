@@ -101,7 +101,7 @@ button.bar-button {
 }
 
 .counter-count {
-  font-size: clamp(1rem, 11vw, em(72));
+  font-size: clamp(1rem, 11vw, #{em(72)});
   line-height: 1;
   padding-bottom: rem(var(--space-smaller));
   text-indent: (1em/-20);
@@ -115,7 +115,7 @@ button.bar-button {
 
 .date-item {
   time {
-    font-size: clamp(1rem, 3vw, em(24));
+    font-size: clamp(1rem, 3vw, #{em(24)});
     margin: 0;
   }
 }
@@ -124,7 +124,7 @@ button.bar-button {
   @extend .tabular;
 
   p {
-    font-size: clamp(rem(18), 6vw, em(36));
+    font-size: clamp(rem(18), 6vw, #{em(36)});
     margin: 0;
   }
 }
